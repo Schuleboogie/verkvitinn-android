@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Verkvitinn</string>
+    <string name="title_activity_login">DD</string>
+    <!-- Strings related to login -->
+    <string name="sign_in_message">Please sign in</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_in_error">Error signing in</string>
+    <!-- Strings related to home screen -->
+    <string name="new_project_button">Create new project</string>
+    <string name="my_profile">My profile</string>
+    <string name="create_worker_group">Create worker group</string>
+    <string name="active_workers">Active workers</string>
 </resources>

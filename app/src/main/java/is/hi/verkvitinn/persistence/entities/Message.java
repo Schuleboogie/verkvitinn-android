@@ -1,14 +1,9 @@
-package project.persistence.entities;
+package is.hi.verkvitinn.persistence.entities;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "messages") // If you want to specify a table name, you can do so here
 public class Message {
 	// Declare that this attribute is the id
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private Long projectId;

@@ -1,48 +1,49 @@
 package is.hi.verkvitinn.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import project.persistence.entities.User;
-import project.persistence.entities.Project;
-import project.persistence.repositories.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import is.hi.verkvitinn.persistence.entities.User;
+import is.hi.verkvitinn.persistence.entities.Project;
+import is.hi.verkvitinn.persistence.repositories.UserRepository;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.security.MessageDigest;
 
-@Service
 public class UserService {
 	// User repository
 	UserRepository users;
 
 	// Dependency Injection
-	@Autowired
 	public UserService(UserRepository users) {
 		this.users = users;
 	}
 
 	// Authenticate user
-	public boolean auth(User user) {
-		User fetchedUser = users.findByUsername(user.getUsername());
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		if (fetchedUser != null) {
-			return encoder.matches(user.getPassword(), fetchedUser.getPassword());
+	public boolean auth(String username, String password) {
+		/*String fetchedPassword = users.getPasswordByUsername(username);
+		if (fetchedPassword != null) {
+			byte[] givenPasswordBytes = MessageDigest.digest(password.getBytes());
+			byte[] fetchedPasswordBytes = fetchedPassword.getBytes();
+			return MessageDigest.isEqual(givenPasswordBytes, fetchedPasswordBytes);
 		}
-		else return false;
+		else return false;*/
+		return false;
 	}
 
 	// Register user
-	public boolean register(User newUser) {
-		String password = newUser.getPassword();
+	public boolean register(String username, String password, String role, String name) {
+		/*
 		// Encode password
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String result = encoder.encode(password);
-		newUser.setPassword(result);
+		MessageDigest.digest(password.getBytes());
+		String encodedPassword = MessageDigest.toString();
+
+		User newUser = new User(username, encodedPassword, role, name, false);
 		// Save user
 		if (users.save(newUser) != null)
 			return true;
 		else return false;
+		return false;*/
+        return false;
 	}
 
 	// Find user by username

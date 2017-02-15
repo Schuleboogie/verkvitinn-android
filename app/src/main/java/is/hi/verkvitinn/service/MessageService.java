@@ -1,9 +1,7 @@
 package is.hi.verkvitinn.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import project.persistence.entities.Message;
-import project.persistence.repositories.MessageRepository;
+import is.hi.verkvitinn.persistence.entities.Message;
+import is.hi.verkvitinn.persistence.repositories.MessageRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,13 +9,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 
-@Service
 public class MessageService {
 	// Message repository
 	MessageRepository messages;
 
 	// Dependency Injection
-	@Autowired
 	public MessageService(MessageRepository messages) {
 		this.messages = messages;
 	}

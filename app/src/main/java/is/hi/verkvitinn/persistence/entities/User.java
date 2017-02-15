@@ -1,13 +1,8 @@
-package project.persistence.entities;
+package is.hi.verkvitinn.persistence.entities;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "users") // If you want to specify a table name, you can do so here
 public class User {
 	// Declare that this attribute is the id
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String username;

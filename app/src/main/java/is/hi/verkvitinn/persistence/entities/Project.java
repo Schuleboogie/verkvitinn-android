@@ -1,18 +1,13 @@
-package project.persistence.entities;
+package is.hi.verkvitinn.persistence.entities;
 
-import javax.persistence.*;
-import project.persistence.entities.User;
+import is.hi.verkvitinn.persistence.entities.User;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Date;
 
-@Entity
-@Table(name = "projects") // If you want to specify a table name, you can do so here
 public class Project {
 	// Declare that this attribute is the id
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;

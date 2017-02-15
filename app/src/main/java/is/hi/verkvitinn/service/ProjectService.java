@@ -1,11 +1,9 @@
 package is.hi.verkvitinn.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import project.persistence.entities.Project;
-import project.persistence.entities.Milestone;
-import project.persistence.repositories.ProjectRepository;
-import project.persistence.repositories.MilestoneRepository;
+import is.hi.verkvitinn.persistence.entities.Project;
+import is.hi.verkvitinn.persistence.entities.Milestone;
+import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
+import is.hi.verkvitinn.persistence.repositories.MilestoneRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 
-@Service
 public class ProjectService {
 	// Project repository
 	ProjectRepository projects;
@@ -21,7 +18,6 @@ public class ProjectService {
 	MilestoneRepository milestones;
 
 	// Dependency Injection
-	@Autowired
 	public ProjectService(ProjectRepository projects, MilestoneRepository milestones) {
 		this.projects = projects;
 		this.milestones = milestones;

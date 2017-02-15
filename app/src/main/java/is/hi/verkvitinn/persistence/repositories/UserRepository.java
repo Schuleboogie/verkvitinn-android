@@ -1,22 +1,44 @@
-package project.persistence.repositories;
+package is.hi.verkvitinn.persistence.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import project.persistence.entities.User;
+import is.hi.verkvitinn.persistence.entities.User;
+//import is.hi.verkvitinn.persistence.repositories.DB;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.List;
 
-/**
- * By extending the {@link JpaRepository} we have access to powerful methods.
- * For detailed information, see:
- * http://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
- * http://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
- *
- */
-public interface UserRepository extends JpaRepository<User, Long> {
-	User save(User newUser);
+public class UserRepository {
+	//private static SQLiteOpenHelper db = DB();
 
-	User findByUsername(String username);
+	public User save(User newUser) {
+		/*
+		SQLiteDatabase writeDB = db.getWritableDatabase();
+		ContentValues user = new ContentValues();
+		user.put("username", newUser.getUsername());
+		user.put("password", newUser.getPassword());
+		user.put("role", newUser.getRole());
+		user.put("name", newUser.getName());
+		user.put("headworker", newUser.getHeadWorker());
+		writeDB.insert("users", null, user);
+		*/
+		return null;
+	}
 
-	List<User> findByRole(String role);
+	public String getPasswordByUsername(String username) {
+		/*SQLiteDatabase readDB = db.getReadableDatabase();
+		Cursor results = readDB.query(true, ["users"], "password", "username=" + username, null, null, null, null, null);
+		if (results.getCount() > 0) {
+			return results.getString(0);
+		}
+		else return null;*/
+		return "";
+	}
+
+	public User findByUsername(String username) { return null; }
+	public List<User> findByRole(String role) {
+		return null;
+	}
 }
