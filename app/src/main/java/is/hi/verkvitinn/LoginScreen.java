@@ -36,11 +36,23 @@ public class LoginScreen extends AppCompatActivity {
     public void login(View view) {
         String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
-        //if (userService.auth("Jon", "1234")) {
+        boolean auth = true;
+        // Check if user has logged in before, if not register user
+        if (userService.findByUsername(username, this) != null) {
+            System.out.println("Old user");
+            // Authenticate user
+            if (!userService.auth(username, password, this))
+                auth = false;
+        }
+        else {
+            userService.register(username, password, "admin", "Skúli Ingvarsson", this);
+        }
+        // If user has authentication, proceed
+        if (auth) {
             // Run activity
             Intent intent = new Intent(this, HomeScreen.class);
             startActivity(intent);
-
-            errorText.setText(R.string.sign_in_error);
+        }
+        else errorText.setText(R.string.sign_in_error);
     }
 }

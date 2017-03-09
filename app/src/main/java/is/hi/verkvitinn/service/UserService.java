@@ -1,5 +1,7 @@
 package is.hi.verkvitinn.service;
 
+import android.content.Context;
+
 import is.hi.verkvitinn.persistence.entities.User;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.UserRepository;
@@ -12,43 +14,46 @@ import java.security.MessageDigest;
 public class UserService {
 	// User repository
 	UserRepository users;
+	MessageDigest encoder;
 
 	// Dependency Injection
 	public UserService(UserRepository users) {
 		this.users = users;
+		//this.encoder = new MessageDigest("md5");
 	}
 
 	// Authenticate user
-	public boolean auth(String username, String password) {
-		/*String fetchedPassword = users.getPasswordByUsername(username);
+	public boolean auth(String username, String password, Context context) {
+		String fetchedPassword = users.getPasswordByUsername(username, context);
 		if (fetchedPassword != null) {
-			byte[] givenPasswordBytes = MessageDigest.digest(password.getBytes());
+			/*
+			byte[] givenPasswordBytes = encoder.digest(password.getBytes());
 			byte[] fetchedPasswordBytes = fetchedPassword.getBytes();
-			return MessageDigest.isEqual(givenPasswordBytes, fetchedPasswordBytes);
+			*/
+			return fetchedPassword.equals(password);
+			//return encoder.isEqual(givenPasswordBytes, fetchedPasswordBytes);
 		}
-		else return false;*/
-		return false;
+		else return false;
 	}
 
 	// Register user
-	public boolean register(String username, String password, String role, String name) {
-		/*
+	public boolean register(String username, String password, String role, String name, Context context) {
 		// Encode password
-		MessageDigest.digest(password.getBytes());
-		String encodedPassword = MessageDigest.toString();
+		/*
+		encoder.digest(password.getBytes());
+		String encodedPassword = encoder.toString();*/
+		String encodedPassword = password;
 
 		User newUser = new User(username, encodedPassword, role, name, false);
 		// Save user
-		if (users.save(newUser) != null)
+		if (users.save(newUser, context) != null)
 			return true;
 		else return false;
-		return false;*/
-        return false;
 	}
 
 	// Find user by username
-	public User findByUsername(String username) {
-		return users.findByUsername(username);
+	public User findByUsername(String username, Context context) {
+		return users.findByUsername(username, context);
 	}
 
 	// Find users by role

@@ -1,29 +1,23 @@
 package is.hi.verkvitinn.persistence.repositories;
 
 import is.hi.verkvitinn.persistence.entities.User;
-//import is.hi.verkvitinn.persistence.repositories.DB;
+import is.hi.verkvitinn.persistence.repositories.DatabaseHelper;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
+import android.view.View;
 
 import java.util.List;
 
 public class UserRepository {
-	//private static SQLiteOpenHelper db = DB();
-    //DatabaseHelper db=DatabaseHelper.getInstance(this);
-    private SQLiteDatabase myDataBase;
-    public void openDataBase() throws SQLException {
-        String myPath = "C:\\Users\\sunna" + "verkvitinn";
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null,
-                SQLiteDatabase.OPEN_READWRITE);
-    }
+    public static User save(User newUser, Context context) {
+		DatabaseHelper dbHelper = new DatabaseHelper(context);
+		SQLiteDatabase writeDB = dbHelper.getWritableDatabase();
 
-
-    public User save(User newUser){
-		SQLiteDatabase writeDB = myDataBase.getWritableDatabase();
 		ContentValues user = new ContentValues();
 		user.put("username", newUser.getUsername());
 		user.put("password", newUser.getPassword());
@@ -34,18 +28,34 @@ public class UserRepository {
 		return null;
 	}
 
-	public String getPasswordByUsername(String username) {
-		/*SQLiteDatabase readDB = db.getReadableDatabase();
-		Cursor results = readDB.query(true, ["users"], "password", "username=" + username, null, null, null, null, null);
+	public static String getPasswordByUsername(String username, Context context) {
+		DatabaseHelper dbHelper = new DatabaseHelper(context);
+		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+		String[] projection = {"password"};
+		String selection = "username = ?";
+		String[] selectionArgs = { username };
+		Cursor results = readDB.query("users", projection, selection, selectionArgs, null, null, null);
 		if (results.getCount() > 0) {
 			return results.getString(0);
 		}
-		else return null;*/
-		return "";
+		else return null;
 	}
 
-	public User findByUsername(String username) { return null; }
-	public List<User> findByRole(String role) {
+	public static User findByUsername(String username, Context context) {
+		DatabaseHelper dbHelper = new DatabaseHelper(context);
+		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+		String selection = "username = ?";
+		String[] selectionArgs = { username };
+		Cursor results = readDB.query("users", null, selection, selectionArgs, null, null, null);
+		if (results.getCount() > 0) {
+			System.out.println(results.getColumnCount());
+			User foundUser = new User(String.valueOf(results.getLong(1)), results.getString(2), results.getString(3), results.getString(4), (results.getInt(5) != 0));
+			System.out.println(results.getString(0));
+			return foundUser;
+		}
+		else return null;
+	}
+	public static List<User> findByRole(String role) {
 		return null;
 	}
 }

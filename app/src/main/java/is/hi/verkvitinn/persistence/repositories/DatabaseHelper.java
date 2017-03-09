@@ -34,29 +34,31 @@ public abstract class DB extends SQLiteOpenHelper {
     }
 }*/
 
-public abstract class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static DatabaseHelper sInstance;
-
-    private static final String DATABASE_NAME = "database_name";
-    private static final String DATABASE_TABLE = "table_name";
+    private static final String DATABASE_NAME = "Verkvitinn.db";
     private static final int DATABASE_VERSION = 1;
+    private static final String USERS_TABLE_CREATE = "CREATE TABLE users(id integer,"
+            + "username varchar(255),"
+            + "password varchar(255),"
+            + "role varchar(255),"
+            + "name varchar(255),"
+            + "headworker boolean"
+            + ");";
 
-    public static synchronized DatabaseHelper getInstance(Context context) {
 
-        // Use the application context, which will ensure that you
-        // don't accidentally leak an Activity's context.
-        if (sInstance == null) {
-            sInstance = new DatabaseHelper(context.getApplicationContext());
-        }
-        return sInstance;
-    }
-
-    /**
-     * Constructor should be private to prevent direct instantiation.
-     * make call to static method "getInstance()" instead.
-     */
-    private DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    public void onCreate(SQLiteDatabase db) {
+
+        db.execSQL(USERS_TABLE_CREATE);
+    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //db.execSQL(SQL_DELETE_ENTRIES);
+        onCreate(db);
+    }
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db, oldVersion, newVersion);
     }
 }
