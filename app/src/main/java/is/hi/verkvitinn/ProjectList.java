@@ -48,7 +48,6 @@ public class ProjectList extends ArrayAdapter {
     }
     @Override
     public View getView(int i, View view, ViewGroup vg) {
-        final int projectId = i;
         // TODO Auto-generated method stub
         View vi = view;
         if (vi == null)
@@ -58,7 +57,7 @@ public class ProjectList extends ArrayAdapter {
         TextView projectWorkers = (TextView) vi.findViewById(R.id.pWorkers);
         TextView projectLocation = (TextView) vi.findViewById(R.id.pLocation);
         TextView projectStatus = (TextView) vi.findViewById(R.id.pStatus);
-        Project tProject = projects.get(i);
+        final Project tProject = projects.get(i);
         projectName.setText(tProject.getName());
         projectWorkers.setText("" + tProject.getWorkers().length + " workers");
         projectLocation.setText(tProject.getLocation());
@@ -70,7 +69,7 @@ public class ProjectList extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ProjectScreen.class);
-                intent.putExtra(PROJECT_ID, projectId);
+                intent.putExtra(PROJECT_ID, tProject.getId());
                 getContext().startActivity(intent);
             }
         });

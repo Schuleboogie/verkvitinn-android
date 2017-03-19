@@ -27,6 +27,8 @@ public class CreateProject extends AppCompatActivity {
     private EditText projectToolsField;
     private EditText projectEstTimeField;
 
+    private Long projectId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,30 @@ public class CreateProject extends AppCompatActivity {
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getSupportActionBar().setHomeButtonEnabled(true);
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.home_icon);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Set project info if edit mode is on
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            String editMode = extras.getString(ProjectScreen.PROJECT_EDIT);
+            String projectId = extras.getString(ProjectScreen.PROJECT_ID);
+            if (editMode.equals("true")) {
+                // Find project
+                Project foundProject = projectService.findOne(Long.valueOf(projectId), this);
+                if (foundProject != null) {
+                    this.projectId = Long.valueOf(projectId);
+                    projectNameField.setText(foundProject.getName());
+                    projectDescriptionField.setText(foundProject.getDescription());
+                    projectLocationField.setText(foundProject.getLocation());
+                    projectToolsField.setText(foundProject.getTools());
+                    projectEstTimeField.setText(foundProject.getEstTime());
+                }
+            }
+        }
+        else this.projectId = null;
     }
     // Called when user wants to assign workers
     public void assignWorkers(View view) {
@@ -64,10 +90,14 @@ public class CreateProject extends AppCompatActivity {
         // Assign admin hér
         String admin = "Skúli Ingvarsson";
         Project newProject = new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, projectStartTime, projectFinishTime, projectWorkers, projectHeadWorkers, projectStatus);
+        if (this.projectId != null) { newProject.setId(this.projectId); }
         if (projectService.create(newProject, this) != null)
         {
-            // Senda á project screen
-            Toast.makeText(this, R.string.project_create_success, Toast.LENGTH_SHORT).show();
+            // Senda á project screen hér
+            if (this.projectId != null) {
+                Toast.makeText(this, R.string.project_update_success, Toast.LENGTH_SHORT).show();
+            }
+            else Toast.makeText(this, R.string.project_create_success, Toast.LENGTH_SHORT).show();
         }
         else {
             Toast.makeText(this, R.string.project_create_error, Toast.LENGTH_SHORT).show();

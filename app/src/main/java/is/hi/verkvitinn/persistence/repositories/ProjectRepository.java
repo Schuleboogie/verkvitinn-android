@@ -20,6 +20,7 @@ public class ProjectRepository {
 	public static Project save(Project newProject, Context context) {
 		DatabaseHelper dbHelper = new DatabaseHelper(context);
 		SQLiteDatabase writeDB = dbHelper.getWritableDatabase();
+		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
 
 		// Conversions
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
@@ -28,6 +29,7 @@ public class ProjectRepository {
 		String workers = convertArrayToString(newProject.getWorkers());
 		String headWorkers = convertArrayToString(newProject.getHeadWorkers());
 
+		// Set project info
 		ContentValues project = new ContentValues();
 		project.put("name", newProject.getName());
 		project.put("admin", newProject.getAdmin());
@@ -40,7 +42,20 @@ public class ProjectRepository {
 		project.put("workers", workers);
 		project.put("headWorkers", headWorkers);
 		project.put("status", newProject.getStatus());
-		writeDB.insert("projects", null, project);
+
+		// Update if project exists but create otherwise
+		boolean projectExists = false;
+		String selection = "id = ?";
+		String[] selectionArgs = { "" + newProject.getId() };
+		Cursor results = readDB.query("projects", null, selection, selectionArgs, null, null, null);
+		if (results.getCount() > 0) {
+			projectExists = true;
+		}
+
+		if (projectExists) {
+			writeDB.update("projects", project, selection, selectionArgs);
+		}
+		else writeDB.insert("projects", null, project);
 
 		return newProject;
 	}
@@ -83,6 +98,7 @@ public class ProjectRepository {
 				String[] workers = convertStringToArray(results.getString(9));
 				String[] headWorkers = convertStringToArray(results.getString(10));
 				foundProject = new Project(results.getString(1), results.getString(2), results.getString(3), results.getString(4), results.getString(5), results.getString(6), startTime, finishTime, workers, headWorkers, results.getString(11));
+				foundProject.setId(Long.valueOf(results.getInt(0)));
 				results.moveToNext();
 			}
 			results.close();
@@ -116,6 +132,7 @@ public class ProjectRepository {
 				String[] workers = convertStringToArray(results.getString(9));
 				String[] headWorkers = convertStringToArray(results.getString(10));
 				foundProject = new Project(results.getString(1), results.getString(2), results.getString(3), results.getString(4), results.getString(5), results.getString(6), startTime, finishTime, workers, headWorkers, results.getString(11));
+				foundProject.setId(Long.valueOf(results.getInt(0)));
 				foundProjects.add(foundProject);
 				results.moveToNext();
 			}
