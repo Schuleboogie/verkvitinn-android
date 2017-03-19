@@ -14,100 +14,79 @@
         android:id="@+id/tv_projectName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="118dp"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="11dp"
-        android:text="TextView"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editProjectButton"
+        android:layout_marginTop="13dp"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tv_projectName"
-        android:layout_alignRight="@+id/tv_projectName"
-        android:layout_below="@+id/tv_projectName"
-        android:layout_marginTop="94dp"
-        android:text="TextView" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_description"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/label_description" />
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/tv_admin"
-        android:layout_alignRight="@+id/tv_admin"
-        android:layout_below="@+id/tv_admin"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginTop="68dp"
-        android:text="TextView" />
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_projectName"
+        android:layout_marginTop="19dp"
+        android:layout_toEndOf="@+id/label_est_time"
+        android:layout_toRightOf="@+id/label_est_time" />
 
     <TextView
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_alignBaseline="@+id/tv_tools"
-        android:layout_alignBottom="@+id/tv_tools"
-        android:layout_alignLeft="@+id/tv_description"
-        android:layout_alignStart="@+id/tv_description" />
+        android:layout_alignLeft="@+id/tv_admin"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/tv_admin"
+        android:layout_below="@+id/tv_admin"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:id="@+id/tv_tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_description"
-        android:layout_marginLeft="49dp"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="52dp"
-        android:layout_toEndOf="@+id/tv_location"
-        android:layout_toRightOf="@+id/tv_location"
-        android:text="TextView" />
+        android:layout_alignLeft="@+id/tv_location"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/tv_location"
+        android:layout_below="@+id/tv_location"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:id="@+id/tv_est_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:text="TextView"
-        android:layout_below="@+id/tv_tools"
-        android:layout_alignLeft="@+id/tv_tools"
-        android:layout_alignStart="@+id/tv_tools"
-        android:layout_marginTop="21dp" />
-
-    <TextView
-        android:id="@+id/tv_est_fisish_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_below="@+id/tv_description"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/tv_est_start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_admin"
-        android:layout_alignLeft="@+id/tv_est_time"
-        android:layout_alignStart="@+id/tv_est_time"
+        android:layout_alignBaseline="@+id/label_est_time"
+        android:layout_alignBottom="@+id/label_est_time"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:text="TextView" />
+        android:layout_toEndOf="@+id/label_est_time"
+        android:paddingLeft="20dp" />
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_below="@+id/tv_projectName"
-        android:layout_toLeftOf="@+id/tv_description"
-        android:layout_toStartOf="@+id/tv_description"
-        android:layout_marginTop="14dp" />
+        android:layout_alignLeft="@+id/tv_tools"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/tv_tools"
+        android:layout_below="@+id/tv_est_time" />
 
     <ListView
         android:layout_width="match_parent"
@@ -117,5 +96,90 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/editProjectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:onClick="editProject"
+        android:text="Edit project" />
+
+    <TextView
+        android:id="@+id/label_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_description"
+        android:text="Description"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/label_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_description"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:text="Admin"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/label_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/label_admin"
+        android:layout_marginBottom="15dp"
+        android:text="Location"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/label_est_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_tools"
+        android:text="Estimated time"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/label_tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/label_location"
+        android:layout_marginBottom="15dp"
+        android:text="Tools"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/label_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_status"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Status"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/label_workers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/workerList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:text="Assigned workers"
+        android:textStyle="bold" />
 
 </RelativeLayout>

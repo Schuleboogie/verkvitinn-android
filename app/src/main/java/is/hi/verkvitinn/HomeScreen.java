@@ -57,11 +57,6 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showProject(View view) {
-        Intent intent = new Intent(this, project_screen.class);
-        startActivity(intent);
-    }
-
     private void displayProjects() {
         List<Project> foundProjects = projectService.findByAdmin("Skúli Ingvarsson", this);
         if (foundProjects != null) {

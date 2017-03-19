@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,10 @@ public class ProjectScreen extends AppCompatActivity {
     ProjectRepository projects;
 
     private TextView projectName;
+    private Long projectId;
+
+    public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
+    public static final String PROJECT_EDIT = "is.hi.verkvitinn.PROJECT_EDIT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +40,11 @@ public class ProjectScreen extends AppCompatActivity {
 
         // Get project info
         Intent intent = getIntent();
-        int projectId = intent.getIntExtra(ProjectList.PROJECT_ID, -1);
+        Long projectId = intent.getLongExtra(ProjectList.PROJECT_ID, -1);
+        this.projectId = projectId;
 
         projectName = (TextView) findViewById(R.id.tv_projectName);
-        Project p = projectService.findOne(Long.valueOf(projectId), this);
+        Project p = projectService.findOne(projectId, this);
         if (p != null) {
             TextView name = (TextView) findViewById(R.id.tv_projectName);
             TextView admin = (TextView) findViewById(R.id.tv_admin);
@@ -45,8 +52,8 @@ public class ProjectScreen extends AppCompatActivity {
             TextView location = (TextView) findViewById(R.id.tv_location);
             TextView tools = (TextView) findViewById(R.id.tv_tools);
             TextView estTime = (TextView) findViewById(R.id.tv_est_time);
-            TextView estStart = (TextView) findViewById(R.id.tv_est_start_time);
-            TextView estFinish = (TextView) findViewById(R.id.tv_est_fisish_time);
+            /*TextView estStart = (TextView) findViewById(R.id.tv_est_start_time);
+            TextView estFinish = (TextView) findViewById(R.id.tv_est_finish_time);*/
             TextView status = (TextView) findViewById(R.id.tv_status);
 
 
@@ -56,8 +63,8 @@ public class ProjectScreen extends AppCompatActivity {
             location.setText(p.getLocation());
             tools.setText(p.getTools());
             estTime.setText(p.getEstTime());
-            estStart.setText(p.getStartTime().toString());
-            estFinish.setText(p.getFinishTime().toString());
+            /*estStart.setText(p.getStartTime().toString());
+            estFinish.setText(p.getFinishTime().toString());*/
             status.setText(p.getStatus());
 
             ListView workers = (ListView) findViewById(R.id.workerList);
@@ -71,6 +78,21 @@ public class ProjectScreen extends AppCompatActivity {
 
         }
         else projectName.setText("Project not found");
+    }
+    public void editProject(View view) {
+        Intent intent = new Intent(this, CreateProject.class);
+        Bundle extras = new Bundle();
+        extras.putString(PROJECT_ID, "" + this.projectId);
+        extras.putString(PROJECT_EDIT, "true");
+        intent.putExtras(extras);
+        this.startActivity(intent);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        Long projectId = intent.getLongExtra(ProjectList.PROJECT_ID, -1);
+        this.projectId = projectId;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
