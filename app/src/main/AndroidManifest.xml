@@ -25,6 +25,7 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".HomeScreen" />
         <activity android:name=".CreateProject" />
+        <activity android:name=".project_screen" />
         <activity
             android:name=".AndroidDatabaseManager"
             android:theme="@style/Theme.AppCompat.Light" />
