@@ -1,5 +1,7 @@
 package is.hi.verkvitinn.service;
 
+import android.content.Context;
+
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.entities.Milestone;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
@@ -24,19 +26,19 @@ public class ProjectService {
 	}
 
 	// Create project
-	public Project create(Project newProject) {
+	public Project create(Project newProject, Context context) {
 		// Save project
-		return projects.save(newProject);
+		return projects.save(newProject, context);
 	}
 
 	// Find projects by admin
-	public List<Project> findByAdmin(String admin) {
-		return projects.findByAdmin(admin);
+	public List<Project> findByAdmin(String admin, Context context) {
+		return projects.findByAdmin(admin, context);
 	}
 
 	// Find project by id
-	public Project findOne(Long id) {
-		return projects.findOne(id);
+	public Project findOne(Long id, Context context) {
+		return projects.findOne(id, context);
 	}
 
 	// Delete project by id
@@ -82,26 +84,26 @@ public class ProjectService {
 	}
 
 	// Start and finish project with id projectId
-	public boolean startProject(Long projectId) {
-		Project project = projects.findOne(projectId);
+	public boolean startProject(Long projectId, Context context) {
+		Project project = projects.findOne(projectId, context);
 		if (project != null) {
 			project.setStatus("in-progress");
 			// Set start time
 			project.setStartTime(new Date());
-			Project updatedProject = projects.save(project);
+			Project updatedProject = projects.save(project, context);
 			if (updatedProject != null)
 				return true;
 			else return false;
 		}
 		else return false;
 	}
-	public boolean finishProject(Long projectId) {
-		Project project = projects.findOne(projectId);
+	public boolean finishProject(Long projectId, Context context) {
+		Project project = projects.findOne(projectId, context);
 		if (project != null) {
 			project.setStatus("finished");
 			// Set finish time
 			project.setFinishTime(new Date());
-			Project updatedProject = projects.save(project);
+			Project updatedProject = projects.save(project, context);
 			if (updatedProject != null)
 				return true;
 			else return false;

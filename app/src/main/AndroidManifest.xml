@@ -24,7 +24,11 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".HomeScreen" />
-        <activity android:name=".CreateProject"></activity>
+        <activity android:name=".CreateProject" />
+        <activity
+            android:name=".AndroidDatabaseManager"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity android:name=".ProjectScreen"></activity>
     </application>
 
 </manifest>

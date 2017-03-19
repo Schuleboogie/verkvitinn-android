@@ -1,12 +1,16 @@
 package is.hi.verkvitinn;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import is.hi.verkvitinn.persistence.entities.User;
 import is.hi.verkvitinn.persistence.repositories.UserRepository;
 import is.hi.verkvitinn.service.UserService;
 import is.hi.verkvitinn.persistence.repositories.UserRepository;
@@ -39,17 +43,16 @@ public class LoginScreen extends AppCompatActivity {
         boolean auth = true;
         // Check if user has logged in before, if not register user
         if (userService.findByUsername(username, this) != null) {
-            System.out.println("Old user");
             // Authenticate user
-            if (!userService.auth(username, password, this))
+            if (!userService.auth(username, password, this)) {
                 auth = false;
+            }
         }
         else {
             userService.register(username, password, "admin", "Skúli Ingvarsson", this);
         }
         // If user has authentication, proceed
         if (auth) {
-            // Run activity
             Intent intent = new Intent(this, HomeScreen.class);
             startActivity(intent);
         }

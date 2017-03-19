@@ -36,7 +36,14 @@ public class UserRepository {
 		String[] selectionArgs = { username };
 		Cursor results = readDB.query("users", projection, selection, selectionArgs, null, null, null);
 		if (results.getCount() > 0) {
-			return results.getString(0);
+			String password = "";
+			results.moveToFirst();
+			while (results.isAfterLast() == false) {
+				password = results.getString(0);
+				results.moveToNext();
+			}
+			results.close();
+			return password;
 		}
 		else return null;
 	}
@@ -48,9 +55,13 @@ public class UserRepository {
 		String[] selectionArgs = { username };
 		Cursor results = readDB.query("users", null, selection, selectionArgs, null, null, null);
 		if (results.getCount() > 0) {
-			System.out.println(results.getColumnCount());
-			User foundUser = new User(String.valueOf(results.getLong(1)), results.getString(2), results.getString(3), results.getString(4), (results.getInt(5) != 0));
-			System.out.println(results.getString(0));
+			User foundUser = null;
+			results.moveToFirst();
+			while (results.isAfterLast() == false) {
+				foundUser = new User(results.getString(1), results.getString(2), results.getString(3), results.getString(4), (results.getInt(5) != 0));
+				results.moveToNext();
+			}
+			results.close();
 			return foundUser;
 		}
 		else return null;

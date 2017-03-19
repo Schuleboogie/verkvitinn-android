@@ -14,12 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/projectName" />
+        android:id="@+id/projectName"
+        android:hint="Project name" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -31,52 +31,42 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="27dp"
         android:id="@+id/projectDescription"
-        android:text="Description" />
+        android:hint="Project description" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Location"
         android:ems="10"
         android:layout_below="@+id/projectDescription"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="27dp"
-        android:id="@+id/projectLocation" />
+        android:id="@+id/projectLocation"
+        android:hint="Location" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Tools"
         android:ems="10"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/projectTools" />
-
-    <TextView
-        android:text="Assigned Workers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/projectEstTime"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="27dp"
-        android:id="@+id/projectAssignedWorkersText" />
+        android:id="@+id/projectTools"
+        android:hint="Tools" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Estimated Time"
         android:ems="10"
         android:layout_marginTop="27dp"
         android:id="@+id/projectEstTime"
         android:layout_below="@+id/projectTools"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:hint="Estimated Time" />
 
     <Button
         android:text="Submit project"
@@ -85,5 +75,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/submitProjectButton" />
+        android:id="@+id/submitProjectButton"
+        android:layout_alignRight="@+id/projectEstTime"
+        android:layout_alignEnd="@+id/projectEstTime"
+        android:onClick="createProject" />
+
+    <Button
+        android:text="Assign workers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/submitProjectButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/button4"
+        android:layout_alignRight="@+id/submitProjectButton"
+        android:layout_alignEnd="@+id/submitProjectButton"
+        android:onClick="assignWorkers" />
 </RelativeLayout>
