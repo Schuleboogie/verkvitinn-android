@@ -11,12 +11,111 @@
     tools:context="is.hi.verkvitinn.ProjectScreen">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tv_projectName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/projectName"
+        android:layout_marginLeft="118dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="11dp"
+        android:text="TextView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20sp"
-        android:textStyle="normal|bold" />
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tv_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_projectName"
+        android:layout_alignRight="@+id/tv_projectName"
+        android:layout_below="@+id/tv_projectName"
+        android:layout_marginTop="94dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_admin"
+        android:layout_alignRight="@+id/tv_admin"
+        android:layout_below="@+id/tv_admin"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginTop="68dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/tv_tools"
+        android:layout_alignBottom="@+id/tv_tools"
+        android:layout_alignLeft="@+id/tv_description"
+        android:layout_alignStart="@+id/tv_description" />
+
+    <TextView
+        android:id="@+id/tv_tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_description"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="52dp"
+        android:layout_toEndOf="@+id/tv_location"
+        android:layout_toRightOf="@+id/tv_location"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_est_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:text="TextView"
+        android:layout_below="@+id/tv_tools"
+        android:layout_alignLeft="@+id/tv_tools"
+        android:layout_alignStart="@+id/tv_tools"
+        android:layout_marginTop="21dp" />
+
+    <TextView
+        android:id="@+id/tv_est_fisish_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/tv_description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tv_est_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_admin"
+        android:layout_alignLeft="@+id/tv_est_time"
+        android:layout_alignStart="@+id/tv_est_time"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/tv_projectName"
+        android:layout_toLeftOf="@+id/tv_description"
+        android:layout_toStartOf="@+id/tv_description"
+        android:layout_marginTop="14dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:padding="0dp"
+        android:id="@+id/workerList"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

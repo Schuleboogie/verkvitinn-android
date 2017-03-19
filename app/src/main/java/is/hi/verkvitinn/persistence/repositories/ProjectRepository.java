@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.entities.User;
@@ -82,6 +83,7 @@ public class ProjectRepository {
 				}
 				String[] workers = convertStringToArray(results.getString(9));
 				String[] headWorkers = convertStringToArray(results.getString(10));
+				Log.d(results.getString(1), "fann þetta með þessu id");
 				foundProject = new Project(results.getString(1), results.getString(2), results.getString(3), results.getString(4), results.getString(5), results.getString(6), startTime, finishTime, workers, headWorkers, results.getString(11));
 				results.moveToNext();
 			}
@@ -115,6 +117,7 @@ public class ProjectRepository {
 				}
 				String[] workers = convertStringToArray(results.getString(9));
 				String[] headWorkers = convertStringToArray(results.getString(10));
+				Log.d(results.getString(0), "--id");
 				foundProject = new Project(results.getString(1), results.getString(2), results.getString(3), results.getString(4), results.getString(5), results.getString(6), startTime, finishTime, workers, headWorkers, results.getString(11));
 				foundProjects.add(foundProject);
 				results.moveToNext();

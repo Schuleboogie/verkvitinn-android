@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Date;
 
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
-import is.hi.verkvitinn.persistence.repositories.UserRepository;
 import is.hi.verkvitinn.service.ProjectService;
-import is.hi.verkvitinn.service.UserService;
 
 public class CreateProject extends AppCompatActivity {
     ProjectService projectService;
@@ -33,7 +30,7 @@ public class CreateProject extends AppCompatActivity {
         setContentView(R.layout.activity_create_project);
         this.projectService = new ProjectService(projects, null);
 
-        projectNameField = (EditText) findViewById(R.id.projectName);
+        projectNameField = (EditText) findViewById(R.id.tv_projectName);
         projectDescriptionField = (EditText) findViewById(R.id.projectDescription);
         projectLocationField = (EditText) findViewById(R.id.projectLocation);
         projectToolsField = (EditText) findViewById(R.id.projectTools);
