@@ -15,4 +15,5 @@
     <string name="project_create_success">Project created</string>
     <string name="project_update_success">Project updated</string>
     <string name="project_create_error">Error creating project</string>
+    <string name="title_activity_worker_group">WorkerGroup</string>
 </resources>
