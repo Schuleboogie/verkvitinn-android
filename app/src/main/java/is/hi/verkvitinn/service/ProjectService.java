@@ -87,7 +87,7 @@ public class ProjectService {
 	public boolean startProject(Long projectId, Context context) {
 		Project project = projects.findOne(projectId, context);
 		if (project != null) {
-			project.setStatus("in-progress");
+			project.setStatus("In progress");
 			// Set start time
 			project.setStartTime(new Date());
 			Project updatedProject = projects.save(project, context);
@@ -100,7 +100,7 @@ public class ProjectService {
 	public boolean finishProject(Long projectId, Context context) {
 		Project project = projects.findOne(projectId, context);
 		if (project != null) {
-			project.setStatus("finished");
+			project.setStatus("Finished");
 			// Set finish time
 			project.setFinishTime(new Date());
 			Project updatedProject = projects.save(project, context);

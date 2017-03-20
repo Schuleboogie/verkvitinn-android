@@ -78,12 +78,12 @@ public class CreateProject extends AppCompatActivity {
         String projectLocation = projectLocationField.getText().toString();
         String projectTools = projectToolsField.getText().toString();
         String projectEstTime = projectEstTimeField.getText().toString();
-        Date projectStartTime = new Date();
-        Date projectFinishTime = new Date();
+        Date projectStartTime = null;
+        Date projectFinishTime = null;
         // Ná í workera hér
         String[] projectWorkers = new String[3];
         String[] projectHeadWorkers = new String[3];
-        String projectStatus = "not-started";
+        String projectStatus = "Not started";
         // Assign admin hér
         String admin = "Skúli Ingvarsson";
         Project newProject = new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, projectStartTime, projectFinishTime, projectWorkers, projectHeadWorkers, projectStatus);

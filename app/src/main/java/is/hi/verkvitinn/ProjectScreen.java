@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ public class ProjectScreen extends AppCompatActivity {
     ProjectRepository projects;
 
     private TextView projectName;
+    private Button startProjectButton;
+    private Button finishProjectButton;
     private Long projectId;
 
     public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
@@ -45,6 +48,9 @@ public class ProjectScreen extends AppCompatActivity {
         this.projectId = projectId;
 
         projectName = (TextView) findViewById(R.id.tv_projectName);
+        startProjectButton = (Button) findViewById(R.id.startProjectButton);
+        finishProjectButton = (Button) findViewById(R.id.finishProjectButton);
+
         Project p = projectService.findOne(projectId, this);
         if (p != null) {
             TextView name = (TextView) findViewById(R.id.tv_projectName);
@@ -67,6 +73,14 @@ public class ProjectScreen extends AppCompatActivity {
             /*estStart.setText(p.getStartTime().toString());
             estFinish.setText(p.getFinishTime().toString());*/
             status.setText(p.getStatus());
+            if (p.getStatus().equals("In progress")) {
+                startProjectButton.setVisibility(View.GONE);
+                finishProjectButton.setVisibility(View.VISIBLE);
+            }
+            else if (p.getStatus().equals("Finished")) {
+                startProjectButton.setVisibility(View.GONE);
+            }
+
 
             ListView workers = (ListView) findViewById(R.id.workerList);
             final ArrayList<String> list = new ArrayList<String>();
@@ -95,6 +109,26 @@ public class ProjectScreen extends AppCompatActivity {
         intent.putExtra(PROJECT_LOCATION, projectLocation);
         startActivity(intent);
     }
+    public void startProject(View view) {
+        if (projectService.startProject(this.projectId, this)) {
+            Toast.makeText(this, "Project started", Toast.LENGTH_SHORT).show();
+            TextView status = (TextView) findViewById(R.id.tv_status);
+            status.setText("In progress");
+            // Show finish project button
+            finishProjectButton.setVisibility(View.VISIBLE);
+        }
+        else Toast.makeText(this, "Project could not be started", Toast.LENGTH_SHORT).show();
+    }
+    public void finishProject(View view) {
+        if (projectService.finishProject(this.projectId, this)) {
+            Toast.makeText(this, "Project finished", Toast.LENGTH_SHORT).show();
+            TextView status = (TextView) findViewById(R.id.tv_status);
+            status.setText("Finished");
+            // Hide finish project button
+            finishProjectButton.setVisibility(View.GONE);
+        }
+        else Toast.makeText(this, "Project could not be finished", Toast.LENGTH_SHORT).show();
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -106,7 +140,6 @@ public class ProjectScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                // ProjectsActivity is my 'home' activity
                 super.onBackPressed();
                 Intent intent = new Intent(this, HomeScreen.class);
                 startActivity(intent);
