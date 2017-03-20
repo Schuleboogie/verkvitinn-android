@@ -57,14 +57,14 @@ public class UserService {
 	}
 
 	// Find users by role
-	public List<User> findByRole(String role) {
-		return users.findByRole(role);
+	public List<User> findByRole(String role, Context context) {
+		return users.findByRole(role, context);
 	}
 
 	// Find workers not in project
-	public List<User> findWorkersNotInProject(Project project) {
+	public List<User> findWorkersNotInProject(Project project, Context context) {
 		String[] projectWorkers = project.getWorkers();
-		List<User> allWorkers = this.findByRole("worker");
+		List<User> allWorkers = this.findByRole("worker", context);
 		// Return all workers if no workers on project
 		if (projectWorkers == null)
 			return allWorkers;

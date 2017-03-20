@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
@@ -66,7 +67,22 @@ public class UserRepository {
 		}
 		else return null;
 	}
-	public static List<User> findByRole(String role) {
-		return null;
+	public static List<User> findByRole(String role, Context context) {
+		DatabaseHelper dbHelper = new DatabaseHelper(context);
+		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+		String selection = "role = ?";
+		String[] selectionArgs = { role };
+		Cursor results = readDB.query("users", null, selection, selectionArgs, null, null, null);
+		if (results.getCount() > 0) {
+			List<User> workerList = new ArrayList<User>();
+			results.moveToFirst();
+			while (results.isAfterLast() == false) {
+				workerList.add(new User(results.getString(1), results.getString(2), results.getString(3), results.getString(4), (results.getInt(5) != 0)));
+				results.moveToNext();
+			}
+			results.close();
+			return workerList;
+		}
+		else return null;
 	}
 }

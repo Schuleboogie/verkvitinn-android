@@ -34,7 +34,7 @@ public class WorkerGroup extends AppCompatActivity {
         workerList = (ListView) findViewById(R.id.workerList);
 
 
-        List<User> workers= userService.findByRole("Worker");
+        List<User> workers= userService.findByRole("worker", this);
         if (workers != null) {
             WorkerList adapter = new WorkerList(this, android.R.layout.simple_list_item_1, workers);
             workerList.setAdapter(adapter);
