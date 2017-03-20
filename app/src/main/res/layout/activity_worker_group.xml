@@ -49,6 +49,6 @@
         android:layout_alignParentStart="true"
         android:id="@+id/submitGroupButton"
         android:layout_below="@+id/projectList"
-        android:onClick="createWorkerGroup" />
+        android:onClick="createGroup" />
 
 </RelativeLayout>

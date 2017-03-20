@@ -26,6 +26,6 @@
         android:id="@+id/cb_setHeadWorker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Setja sem headworker íhóp" />
+        android:text="Setja sem headworker í hóp" />
 
 </LinearLayout>

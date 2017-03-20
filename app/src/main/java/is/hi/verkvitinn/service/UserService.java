@@ -2,9 +2,11 @@ package is.hi.verkvitinn.service;
 
 import android.content.Context;
 
+import is.hi.verkvitinn.persistence.entities.Group;
 import is.hi.verkvitinn.persistence.entities.User;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.UserRepository;
+import is.hi.verkvitinn.persistence.repositories.WorkerGroupRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +17,7 @@ public class UserService {
 	// User repository
 	UserRepository users;
 	MessageDigest encoder;
+	WorkerGroupRepository group;
 
 	// Dependency Injection
 	public UserService(UserRepository users) {
@@ -54,6 +57,10 @@ public class UserService {
 	// Find user by username
 	public User findByUsername(String username, Context context) {
 		return users.findByUsername(username, context);
+	}
+
+	public void addGroup(Group newGroup, Context context){
+		group.save(newGroup, context);
 	}
 
 	// Find users by role
