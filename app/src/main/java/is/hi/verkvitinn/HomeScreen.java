@@ -57,6 +57,11 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void createWorkerGroup(View view){
+        Intent intent = new Intent(this, WorkerGroup.class);
+        startActivity(intent);
+    }
+
     private void displayProjects() {
         List<Project> foundProjects = projectService.findByAdmin("Skúli Ingvarsson", this);
         if (foundProjects != null) {
