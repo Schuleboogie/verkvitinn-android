@@ -20,7 +20,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editProjectButton"
         android:layout_marginTop="13dp"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_admin"
@@ -53,7 +54,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/tv_admin"
         android:layout_below="@+id/tv_admin"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:id="@+id/tv_tools"
@@ -64,7 +65,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignStart="@+id/tv_location"
         android:layout_below="@+id/tv_location"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:id="@+id/tv_est_time"
@@ -89,13 +91,13 @@
         android:layout_below="@+id/tv_est_time" />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:padding="0dp"
         android:id="@+id/workerList"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:padding="0dp" />
 
     <Button
         android:id="@+id/editProjectButton"
@@ -136,7 +138,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/label_admin"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="20dp"
         android:text="Location"
         android:textStyle="bold" />
 
@@ -158,6 +160,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/label_location"
         android:layout_marginBottom="15dp"
+        android:layout_marginTop="0dp"
         android:text="Tools"
         android:textStyle="bold" />
 
@@ -181,5 +184,18 @@
         android:layout_marginBottom="12dp"
         android:text="Assigned workers"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/openMapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:onClick="openMap"
+        android:text="See on map"
+        android:layout_below="@+id/tv_status"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

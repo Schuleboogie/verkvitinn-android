@@ -26,6 +26,7 @@ public class ProjectScreen extends AppCompatActivity {
 
     public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
     public static final String PROJECT_EDIT = "is.hi.verkvitinn.PROJECT_EDIT";
+    public static final String PROJECT_LOCATION = "is.hi.verkvitinn.PROJECT_LOCATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,13 @@ public class ProjectScreen extends AppCompatActivity {
         extras.putString(PROJECT_EDIT, "true");
         intent.putExtras(extras);
         this.startActivity(intent);
+    }
+    public void openMap(View view) {
+        Intent intent = new Intent(this, MapLookup.class);
+        TextView tvLocation = (TextView) findViewById(R.id.tv_location);
+        String projectLocation = tvLocation.getText().toString();
+        intent.putExtra(PROJECT_LOCATION, projectLocation);
+        startActivity(intent);
     }
     @Override
     protected void onStart() {
