@@ -17,6 +17,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.SQLException;
+import android.util.Log;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +47,16 @@ public class WorkerGroupRepository {
             List<Group> groupList = new ArrayList<Group>();
             results.moveToFirst();
             while (results.isAfterLast() == false) {
+                Log.d(results.getString(2),"þarf að verða users");
                 //groupList.add(new Group(results.getString(1), results.getString(2)));
                 results.moveToNext();
             }
             results.close();
             return groupList;
         }
-        else return null;
+        else {
+            return null;
+        }
     }
 
     public static void delete(Group group) {

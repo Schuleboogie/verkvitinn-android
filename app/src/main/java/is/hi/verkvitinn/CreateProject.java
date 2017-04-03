@@ -69,8 +69,23 @@ public class CreateProject extends AppCompatActivity {
     }
     // Called when user wants to assign workers
     public void assignWorkers(View view) {
-        // Open assign workers screen
+        String projectName = projectNameField.getText().toString();
+        String projectDescription = projectDescriptionField.getText().toString();
+        String projectLocation = projectLocationField.getText().toString();
+        String projectTools = projectToolsField.getText().toString();
+        String projectEstTime = projectEstTimeField.getText().toString();
+        // Assign admin hér
+        String admin = "Skúli Ingvarsson";
+        Intent intent = new Intent(this, AddWorkerGroup.class);
+        intent.putExtra("projectName", projectName);
+        intent.putExtra("admin", admin);
+        intent.putExtra("projectDescription", projectDescription);
+        intent.putExtra("projectLocation", projectLocation);
+        intent.putExtra("projectTools", projectTools);
+        intent.putExtra("projectEstTime", projectEstTime);
+        startActivity(intent);
     }
+
     // Post new project form
     public void createProject(View view) {
         String projectName = projectNameField.getText().toString();
@@ -100,6 +115,7 @@ public class CreateProject extends AppCompatActivity {
             Toast.makeText(this, R.string.project_create_error, Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {

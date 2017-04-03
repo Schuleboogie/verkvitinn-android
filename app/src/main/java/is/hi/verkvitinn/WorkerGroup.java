@@ -73,8 +73,4 @@ public class WorkerGroup extends AppCompatActivity {
         }
     }
 
-    public void createGroup(View view){
-
-    }
-
 }

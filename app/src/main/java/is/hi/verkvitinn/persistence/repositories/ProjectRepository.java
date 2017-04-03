@@ -24,9 +24,15 @@ public class ProjectRepository {
 		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
 
 		// Conversions
+        String startTime="";
+        String finishTime="";
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
-		String startTime = formatter.format(newProject.getStartTime());
-		String finishTime = formatter.format(newProject.getFinishTime());
+        if(newProject.getStartTime()!=null){
+            startTime = formatter.format(newProject.getStartTime());
+        }
+        if(newProject.getFinishTime()!=null){
+            finishTime = formatter.format(newProject.getFinishTime());
+        }
 		String workers = convertArrayToString(newProject.getWorkers());
 		String headWorkers = convertArrayToString(newProject.getHeadWorkers());
 
