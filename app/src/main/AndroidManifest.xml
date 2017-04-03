@@ -55,7 +55,9 @@
         <activity
             android:name=".MapLookup"
             android:label="@string/title_activity_map_lookup" />
-        <activity android:name=".AddWorkerGroup"></activity>
+        <activity android:name=".AddWorkerGroup" />
+        <activity android:name=".Milestones" />
+        <activity android:name=".SetMilestone"></activity>
     </application>
 
 </manifest>

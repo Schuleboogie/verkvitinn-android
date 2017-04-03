@@ -109,6 +109,11 @@ public class ProjectScreen extends AppCompatActivity {
         intent.putExtra(PROJECT_LOCATION, projectLocation);
         startActivity(intent);
     }
+    public void seeMilestones(View view) {
+        Intent intent = new Intent(this, Milestones.class);
+        intent.putExtra(PROJECT_ID, this.projectId);
+        startActivity(intent);
+    }
     public void startProject(View view) {
         if (projectService.startProject(this.projectId, this)) {
             Toast.makeText(this, "Project started", Toast.LENGTH_SHORT).show();

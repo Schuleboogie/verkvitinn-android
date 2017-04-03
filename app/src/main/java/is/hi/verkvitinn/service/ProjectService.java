@@ -66,20 +66,22 @@ public class ProjectService {
 
 	/* Milestones */
 	// Set milestone
-	public Milestone setMilestone(Milestone newMilestone) {
-		return milestones.save(newMilestone);
+	public Milestone setMilestone(Milestone newMilestone, Context context) {
+		return milestones.save(newMilestone, context);
 	}
 	// Find milestones associated with project with projectId
-	public List<Milestone> findMilestones(Long projectId) {
-		List<Milestone> foundMilestones = milestones.findByProjectId(projectId);
+	public List<Milestone> findMilestones(Long projectId, Context context) {
+		List<Milestone> foundMilestones = milestones.findByProjectId(projectId, context);
 		// Sort milestones by timestamp
-		Collections.sort(foundMilestones, new Comparator<Milestone>() {
-			public int compare(Milestone m1, Milestone m2) {
-				if (m1.getTimestamp() == null || m2.getTimestamp() == null)
-					return 0;
-				return m2.getTimestamp().compareTo(m1.getTimestamp());
-			}
-		});
+		if (foundMilestones != null) {
+			Collections.sort(foundMilestones, new Comparator<Milestone>() {
+				public int compare(Milestone m1, Milestone m2) {
+					if (m1.getTimestamp() == null || m2.getTimestamp() == null)
+						return 0;
+					return m2.getTimestamp().compareTo(m1.getTimestamp());
+				}
+			});
+		}
 		return foundMilestones;
 	}
 
