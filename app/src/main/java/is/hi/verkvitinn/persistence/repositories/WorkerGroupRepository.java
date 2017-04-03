@@ -34,9 +34,46 @@ public class WorkerGroupRepository {
 
         ContentValues group = new ContentValues();
         group.put("name", newGroup.getName());
-        group.put("workers", newGroup.getWorkers().toString());
+        group.put("workers", convertWorkersToString(newGroup.getWorkers()));
         writeDB.insert("groups", null, group);
         return null;
+    }
+
+    private static String convertWorkersToString(ArrayList<User> workers){
+        String s="";
+        for(int n=0;n<workers.size();n++){
+            s=s+workers.get(n).getUsername()+";";
+        }
+        return s;
+    }
+
+    private static ArrayList<User> convertStringToWorkers(String workerString, Context context){
+        String[] arr = workerString.split(";");
+        UserRepository userRep = new UserRepository();
+        ArrayList<User> users = new ArrayList<>();
+        for(int n=0;n<arr.length;n++){
+            users.add(userRep.findByUsername(arr[n], context));
+        }
+        return users;
+    }
+
+    public static Group findByName(String name, Context context) {
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+        String selection = "name = ?";
+        String[] selectionArgs = { name };
+        Cursor results = readDB.query("groups", null, selection, selectionArgs, null, null, null);
+        if (results.getCount() > 0) {
+            Group foundGroup = null;
+            results.moveToFirst();
+            while (results.isAfterLast() == false) {
+                foundGroup = new Group(results.getString(1), convertStringToWorkers(results.getString(2), context));
+                results.moveToNext();
+            }
+            results.close();
+            return foundGroup;
+        }
+        else return null;
     }
 
     public static List<Group> findAll(Context context) {
@@ -47,8 +84,7 @@ public class WorkerGroupRepository {
             List<Group> groupList = new ArrayList<Group>();
             results.moveToFirst();
             while (results.isAfterLast() == false) {
-                Log.d(results.getString(2),"þarf að verða users");
-                //groupList.add(new Group(results.getString(1), results.getString(2)));
+                groupList.add(new Group(results.getString(1), convertStringToWorkers(results.getString(2), context)));
                 results.moveToNext();
             }
             results.close();

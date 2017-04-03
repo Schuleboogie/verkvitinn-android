@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class ProjectService {
 	// Project repository
-	ProjectRepository projects;
+	static ProjectRepository projects;
 	// Milestone repository
 	MilestoneRepository milestones;
 
@@ -26,7 +26,7 @@ public class ProjectService {
 	}
 
 	// Create project
-	public Project create(Project newProject, Context context) {
+	public static Project create(Project newProject, Context context) {
 		// Save project
 		return projects.save(newProject, context);
 	}

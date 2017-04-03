@@ -18,13 +18,13 @@ import is.hi.verkvitinn.persistence.entities.User;
  * Created by skulii on 17.3.2017.
  */
 
-public class WorkerGroupList extends ArrayAdapter {
+public class AddWorkerGroupList extends ArrayAdapter {
     List<Group> groups;
     private static LayoutInflater inflater = null;
     private Boolean[] inProject;
     public static final String PROJECT_ID = "is.hi.verkvitinn.MESSAGE";
 
-    public WorkerGroupList(Context context, int resource, List<Group> groups) {
+    public AddWorkerGroupList(Context context, int resource, List<Group> groups) {
         super(context, resource, groups);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.groups = groups;
@@ -61,7 +61,7 @@ public class WorkerGroupList extends ArrayAdapter {
         final Group tgroup = groups.get(i);
         workerName.setText(tgroup.getName());
         final int id = i;
-        CheckBox cb_setWorkerGroup = (CheckBox) vi.findViewById(R.id.cb_setWorker);
+        CheckBox cb_setWorkerGroup = (CheckBox) vi.findViewById(R.id.cb_setWorkerGroup);
         cb_setWorkerGroup.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -81,3 +81,4 @@ public class WorkerGroupList extends ArrayAdapter {
         return inProject;
     }
 }
+
