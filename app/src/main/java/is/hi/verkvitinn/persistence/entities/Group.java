@@ -1,5 +1,6 @@
 package is.hi.verkvitinn.persistence.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,9 +10,9 @@ import java.util.List;
 public class Group {
     private Long id;
     private String name;
-    private List<User> workers;
+    private ArrayList<User> workers;
 
-    public Group(String name, List<User> workers){
+    public Group(String name, ArrayList<User> workers){
         this.name=name;
         this.workers=workers;
     }
@@ -24,6 +25,6 @@ public class Group {
 
     public String getName(){return name;}
 
-    public List<User> getWorkers(){return workers;}
+    public ArrayList<User> getWorkers(){return workers;}
 
 }

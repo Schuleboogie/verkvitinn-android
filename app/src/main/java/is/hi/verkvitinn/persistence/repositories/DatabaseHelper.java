@@ -48,6 +48,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "name varchar(255),"
             + "headworker boolean"
             + ");";
+    private static final String GROUPS_TABLE_CREATE = "CREATE TABLE groups(id integer primary key,"
+            + "name varchar(255),"
+            + "workers varchar(255),"
+            + ");";
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS projects;";
+
     private static final String PROJECTS_TABLE_CREATE = "CREATE TABLE projects(id integer primary key,"
             + "name varchar(255),"
             + "admin varchar(255),"
@@ -61,7 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "headWorkers text,"
             + "status varchar(255)"
             + ");";
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS projects;";
 
 
     public DatabaseHelper(Context context) {
@@ -70,6 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(USERS_TABLE_CREATE);
         db.execSQL(PROJECTS_TABLE_CREATE);
+        db.execSQL(GROUPS_TABLE_CREATE);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_ENTRIES);

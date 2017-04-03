@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/wName"
-        android:textStyle="normal|bold" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/wUName"/>
+        android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/cb_setWorker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Setja í hóp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/cb_setHeadWorker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Setja sem headworker í hóp" />
+            <TextView
+                android:id="@+id/wName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textStyle="normal|bold"
+                android:text="Setja í hóp" />
+
+            <TextView
+                android:id="@+id/wUName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Setja í hóp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cb_setWorker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Setja í hóp" />
+
+    </LinearLayout>
 
 </LinearLayout>
