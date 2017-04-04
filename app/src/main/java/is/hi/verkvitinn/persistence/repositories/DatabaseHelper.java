@@ -40,7 +40,7 @@ public abstract class DB extends SQLiteOpenHelper {
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Verkvitinn.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String USERS_TABLE_CREATE = "CREATE TABLE users(id integer primary key,"
             + "username varchar(255),"
             + "password varchar(255),"
@@ -52,9 +52,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "name varchar(255),"
             + "workers varchar(255)"
             + ");";
+    private static final String MILESTONES_TABLE_CREATE = "CREATE TABLE milestones(id integer primary key,"
+            + "projectId integer,"
+            + "timestamp text,"
+            + "title varchar(255)"
+            + ");";
     private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS users;";
     private static final String SQL_DELETE_PROJECTS = "DROP TABLE IF EXISTS projects;";
     private static final String SQL_DELETE_GROUPS = "DROP TABLE IF EXISTS groups;";
+    private static final String SQL_DELETE_MILESTONES = "DROP TABLE IF EXISTS milestones;";
 
     private static final String PROJECTS_TABLE_CREATE = "CREATE TABLE projects(id integer primary key,"
             + "name varchar(255),"
@@ -78,11 +84,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(USERS_TABLE_CREATE);
         db.execSQL(PROJECTS_TABLE_CREATE);
         db.execSQL(GROUPS_TABLE_CREATE);
+        db.execSQL(MILESTONES_TABLE_CREATE);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_USERS);
         db.execSQL(SQL_DELETE_PROJECTS);
         db.execSQL(SQL_DELETE_GROUPS);
+        db.execSQL(SQL_DELETE_MILESTONES);
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
