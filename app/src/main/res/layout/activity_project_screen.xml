@@ -245,7 +245,8 @@
         android:layout_below="@+id/tv_tools"
         android:background="@android:color/holo_green_dark"
         android:onClick="checkin"
-        android:text="Check in" />
+        android:text="Check in"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/checkout"
@@ -256,6 +257,6 @@
         android:layout_below="@+id/tv_tools"
         android:background="@android:color/holo_red_light"
         android:text="Check out"
-        android:visibility="gone"/>
+        android:onClick="checkout"/>
 
 </RelativeLayout>

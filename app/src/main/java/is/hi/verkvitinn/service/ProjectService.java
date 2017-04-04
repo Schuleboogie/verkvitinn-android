@@ -39,6 +39,11 @@ public class ProjectService {
 		return projects.findByAdmin(admin, context);
 	}
 
+	public boolean shouldCheckout(String username, Long projectId, Context context){
+		LogRepository logRepository = new LogRepository();
+		return logRepository.sholdCheckout(username, projectId, context);
+	}
+
 	public List<Project> findByUserAndStatus(String user, boolean onGoing, boolean notStarted, boolean finsihed, Context context){
 		ArrayList<String> status = new ArrayList<>();
 		String statusquery = "( ";
@@ -63,6 +68,11 @@ public class ProjectService {
 			return true;
 		}
 		return false;
+	}
+
+	public void updateLog(Log updatedLog, Context context){
+		LogRepository logRepository = new LogRepository();
+		logRepository.update(updatedLog, context);
 	}
 
 	public List<Project> findByAdminAndStatus(String admin, boolean onGoing, boolean notStarted, boolean finsihed, Context context){

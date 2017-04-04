@@ -24,20 +24,16 @@ public class LogRepository {
 
         // Date conversion
         String timestampin = "";
-        String timestampout = "";
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
 
         if(newLog.getTimeIn()!=null){
             timestampin = formatter.format(newLog.getTimeIn());
         }
 
-        if(newLog.getTimeOut()!=null){
-            timestampout = formatter.format(newLog.getTimeOut());
-        }
 
         ContentValues log = new ContentValues();
         log.put("timeIn", timestampin);
-        log.put("timeOut", timestampout);
+        log.put("timeOut", "");
         log.put("projectId", newLog.getProjectId());
         log.put("username", newLog.getUsername());
         writeDB.insert("log", null, log);
@@ -45,41 +41,30 @@ public class LogRepository {
         return newLog;
     }
 
-    public static Log update(Log updateLog, Context context){
+    public static void update(Log updateLog, Context context){
         DatabaseHelper dbHelper = new DatabaseHelper(context);
-        SQLiteDatabase readDB = dbHelper.getReadableDatabase();
         SQLiteDatabase writeDB = dbHelper.getWritableDatabase();
-        ContentValues log = new ContentValues();
 
 
-        String timestampin = "";
         String timestampout = "";
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
 
-        if(updateLog.getTimeIn()!=null){
-            timestampin = formatter.format(updateLog.getTimeIn());
-        }
 
         if(updateLog.getTimeOut()!=null){
             timestampout = formatter.format(updateLog.getTimeOut());
         }
 
-        log.put("timeIn", timestampin);
-        log.put("timeOut", timestampout);
-        log.put("projectId", updateLog.getProjectId());
-        log.put("username", updateLog.getUsername());
+        String update = "Update log set timeOut='"+timestampout+"' where projectId="+updateLog.getProjectId()+" and username='"+updateLog.getUsername()+"' and timeOut=''";
+        writeDB.execSQL(update);
+    }
 
-        boolean projectExists = false;
-        String selection = "id = ?";
-        String[] selectionArgs = { "" + updateLog.getId() };
-        Cursor results = readDB.query("log", null, selection, selectionArgs, null, null, null);
-        if (results.getCount() > 0) {
-            projectExists = true;
-        }
-
-        if (projectExists) {
-            writeDB.update("log", log, selection, selectionArgs);
-        }
-        return updateLog;
+    public static Boolean sholdCheckout(String username, Long projectId, Context context){
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+        String select = "Select * from log where username='"+username+"' and projectId="+projectId+" and timeOut=''";
+        Cursor cursor = readDB.rawQuery(select, null);
+        if(cursor.getCount()>0)
+            return true;
+        return false;
     }
 }

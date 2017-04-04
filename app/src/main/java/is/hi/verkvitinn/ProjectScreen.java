@@ -105,6 +105,19 @@ public class ProjectScreen extends AppCompatActivity {
                 }
             }
 
+            Button checkin = (Button)findViewById(R.id.checkin);
+            Button checkout = (Button)findViewById(R.id.checkout);
+
+            Boolean shouldCheckout = projectService.shouldCheckout(username, projectId, this);
+
+            if(shouldCheckout){
+                checkout.setVisibility(VISIBLE);
+                checkin.setVisibility(GONE);
+            }
+            else{
+                checkout.setVisibility(GONE);
+                checkin.setVisibility(VISIBLE);
+            }
 
             name.setText(p.getName());
             admin.setText(p.getAdmin());
@@ -173,12 +186,21 @@ public class ProjectScreen extends AppCompatActivity {
     }
 
     public void checkin(View view){
+        Button checkin = (Button)findViewById(R.id.checkin);
+        Button checkout = (Button)findViewById(R.id.checkout);
+        checkout.setVisibility(VISIBLE);
+        checkin.setVisibility(GONE);
         Log newlog = new Log(projectId, Calendar.getInstance().getTime(), null, username);
         projectService.addToLog(newlog, this);
     }
 
     public void checkout(View view){
-
+        Button checkin = (Button)findViewById(R.id.checkin);
+        Button checkout = (Button)findViewById(R.id.checkout);
+        checkout.setVisibility(GONE);
+        checkin.setVisibility(VISIBLE);
+        Log updatedLog = new Log(projectId, null, Calendar.getInstance().getTime(), username);
+        projectService.updateLog(updatedLog, this);
     }
 
     public void finishProject(View view) {
