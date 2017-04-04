@@ -125,6 +125,11 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void seeProfile(View view){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
     private void displayProjects(boolean onGoing, boolean notStarted, boolean finished) {
         if(!onGoing&&!notStarted&&!finished){
             projectList.setVisibility(INVISIBLE);
