@@ -56,7 +56,7 @@ public class ProjectService {
 			String[] workers = project.getWorkers();
 			if (workers == null)
 				continue;
-			for (int i = 0; i < workers.length; i++) {
+			for(int i = 0; i < workers.length; i++) {
 				if (workers[i].equals(worker))
 					workerProjects.add(project);
 			}

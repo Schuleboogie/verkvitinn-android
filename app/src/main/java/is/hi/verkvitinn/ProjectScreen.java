@@ -116,7 +116,6 @@ public class ProjectScreen extends AppCompatActivity {
     }
     public void startProject(View view) {
         if (projectService.startProject(this.projectId, this)) {
-            Toast.makeText(this, "Project started", Toast.LENGTH_SHORT).show();
             TextView status = (TextView) findViewById(R.id.tv_status);
             status.setText("In progress");
             // Show finish project button

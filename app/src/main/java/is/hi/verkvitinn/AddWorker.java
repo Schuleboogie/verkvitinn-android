@@ -71,13 +71,24 @@ public class AddWorker extends AppCompatActivity {
                     for(int n=0;n<users.size();n++){
                         userArray[n]=users.get(n);
                     }
+                    Boolean [] asHeadworker = adapter.getAsHeadWorker();
+                    ArrayList<String> hworkers= new ArrayList<String>();
+                    for(int n=0;n<inProject.length;n++){
+                        if(asHeadworker[n]==true){
+                            hworkers.add(((User)adapter.getItem(n)).getUsername());
+                        }
+                    }
 
+                    String[] hworkerarray = new String[hworkers.size()];
+                    for(int n=0;n<hworkers.size();n++){
+                        hworkerarray[n]=hworkers.get(n);
+                    }
                     String[] workerArray = new String[1];
                     workerArray[0]=users.get(0);
 
                     Intent intent = new Intent(context, HomeScreen.class);
 
-                    Project newProject=new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, null, null, userArray, workerArray, "Not started");
+                    Project newProject=new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, null, null, userArray, hworkerarray, "Not started");
                     ProjectService.create(newProject, context);
                     startActivity(intent);
                 }

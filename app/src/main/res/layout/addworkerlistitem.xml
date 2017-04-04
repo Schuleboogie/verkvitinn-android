@@ -16,7 +16,7 @@
 
             <TextView
                 android:id="@+id/wName"
-                android:layout_width="250dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:textStyle="normal|bold"
                 android:text="Setja í hóp" />
@@ -26,14 +26,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Setja í hóp" />
+
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <CheckBox
             android:id="@+id/cb_setWorker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Setja í verkefni" />
+            android:text="Add to project" />
+
+        <CheckBox
+            android:id="@+id/cb_setHeadWorker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Set as headworker" />
+    </LinearLayout>
+
 
     </LinearLayout>
 

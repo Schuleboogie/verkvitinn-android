@@ -1,6 +1,7 @@
 package is.hi.verkvitinn;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,11 +62,11 @@ public class WorkerGroup extends AppCompatActivity {
                     }
                     EditText groupName = (EditText) findViewById(R.id.tv_groupName);
                     Group newGroup = new Group(groupName.getText().toString(), workers);
-                    for(int n = 0; n<newGroup.getWorkers().size();n++){
-                        Log.d(newGroup.getWorkers().get(n).getUsername(), "Nafn workers");
-                    }
                     WorkerGroupRepository workerGroupRepository=new WorkerGroupRepository();
                     workerGroupRepository.save(newGroup, context);
+                    Toast.makeText(context, "Group created", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, HomeScreen.class);
+                    startActivity(intent);
                 }
             });
         }
@@ -73,9 +75,5 @@ public class WorkerGroup extends AppCompatActivity {
         }
     }
 
-
-    public void createGroup(View view){
-
-    }
 
 }

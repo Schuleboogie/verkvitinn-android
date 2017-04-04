@@ -22,6 +22,7 @@ public class AddWorkerList extends ArrayAdapter {
     List<User> workers;
     private static LayoutInflater inflater = null;
     private Boolean[] inGroup;
+    private Boolean[] asHeadWorker;
     List<User> checked;
     public static final String PROJECT_ID = "is.hi.verkvitinn.MESSAGE";
 
@@ -31,8 +32,10 @@ public class AddWorkerList extends ArrayAdapter {
         this.checked=checked;
         this.workers = workers;
         inGroup = new Boolean[workers.size()];
+        asHeadWorker = new Boolean[workers.size()];
         for(int n=0;n< workers.size();n++){
             inGroup[n]=false;
+            asHeadWorker[n]=false;
         }
     }
     @Override
@@ -65,7 +68,7 @@ public class AddWorkerList extends ArrayAdapter {
         workerName.setText(tworkers.getName());
         final int id = i;
         workerUName.setText(tworkers.getUsername());
-        CheckBox cb_setWorker = (CheckBox) vi.findViewById(R.id.cb_setWorker);
+        final CheckBox cb_setWorker = (CheckBox) vi.findViewById(R.id.cb_setWorker);
         cb_setWorker.setChecked(isInGroup(tworkers.getUsername()));
         inGroup[id]=isInGroup(tworkers.getUsername());
         cb_setWorker.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +80,23 @@ public class AddWorkerList extends ArrayAdapter {
                 }
                 else{
                     inGroup[id]=true;
+                }
+            }
+        });
+        CheckBox cb_setHeadWorker = (CheckBox) vi.findViewById(R.id.cb_setHeadWorker);
+        cb_setHeadWorker.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(asHeadWorker[id]==true){
+                    cb_setWorker.setEnabled(true);
+                    asHeadWorker[id]=false;
+                }
+                else{
+                    cb_setWorker.setChecked(false);
+                    inGroup[id]=false;
+                    cb_setWorker.setEnabled(false);
+                    asHeadWorker[id]=true;
                 }
             }
         });
@@ -93,7 +113,13 @@ public class AddWorkerList extends ArrayAdapter {
        return false;
     }
 
+
     public Boolean [] getInProject(){
         return inGroup;
     }
+
+    public Boolean [] getAsHeadWorker(){
+        return asHeadWorker;
+    }
+
 }
