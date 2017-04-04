@@ -3,6 +3,7 @@ package is.hi.verkvitinn;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -59,6 +60,7 @@ public class Milestones extends AppCompatActivity {
 
         // admin
         admin = user.get(SessionManager.KEY_ADMIN);
+        Log.d(admin, "admininn");
 
         Boolean canAdd=admin.equals("admin");
         if(!canAdd){

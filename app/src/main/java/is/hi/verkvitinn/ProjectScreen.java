@@ -4,6 +4,7 @@ import android.app.LauncherActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,7 +34,8 @@ public class ProjectScreen extends AppCompatActivity {
     private Button finishProjectButton;
     private Long projectId;
     private SessionManager session;
-    private String admin;
+    private String adminString;
+    private String username;
 
     public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
     public static final String PROJECT_EDIT = "is.hi.verkvitinn.PROJECT_EDIT";
@@ -47,7 +49,10 @@ public class ProjectScreen extends AppCompatActivity {
         HashMap<String, String> user = session.getUserDetails();
 
         // name
-        admin = user.get(SessionManager.KEY_ADMIN);
+        adminString = user.get(SessionManager.KEY_ADMIN);
+        username = user.get(SessionManager.KEY_NAME);
+
+
 
         setContentView(R.layout.activity_project_screen);
         this.projectService = new ProjectService(projects, null);
@@ -55,7 +60,7 @@ public class ProjectScreen extends AppCompatActivity {
 
         Button editProjectButton = (Button) findViewById(R.id.editProjectButton);
 
-        if(!admin.equals("admin")){
+        if(!adminString.equals("admin")){
             editProjectButton.setVisibility(INVISIBLE);
         }
         else{
@@ -88,6 +93,17 @@ public class ProjectScreen extends AppCompatActivity {
             TextView estFinish = (TextView) findViewById(R.id.tv_est_finish_time);*/
             TextView status = (TextView) findViewById(R.id.tv_status);
 
+            String[] headworkers = p.getHeadWorkers();
+
+            Boolean canAdd=adminString.equals("admin");
+
+            if(!canAdd){
+                for(int n=0;n<headworkers.length;n++){
+                    if(headworkers[n].equals(username))
+                        canAdd=true;
+                }
+            }
+
 
             name.setText(p.getName());
             admin.setText(p.getAdmin());
@@ -104,6 +120,10 @@ public class ProjectScreen extends AppCompatActivity {
             }
             else if (p.getStatus().equals("Finished")) {
                 startProjectButton.setVisibility(GONE);
+            }
+            if(!canAdd){
+                startProjectButton.setVisibility(GONE);
+                finishProjectButton.setVisibility(GONE);
             }
 
 
