@@ -90,6 +90,8 @@ public class AddWorkerList extends ArrayAdapter {
             public void onClick(View v) {
                 if(asHeadWorker[id]==true){
                     cb_setWorker.setEnabled(true);
+                    inGroup[id]=true;
+                    cb_setWorker.setChecked(true);
                     asHeadWorker[id]=false;
                 }
                 else{

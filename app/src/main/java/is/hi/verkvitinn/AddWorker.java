@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,9 +63,11 @@ public class AddWorker extends AppCompatActivity {
                 public void onClick(View v) {
                     ArrayList<String> users= new ArrayList<String>();
                     Boolean [] inProject = adapter.getInProject();
+                    ArrayList<String> hworkers= new ArrayList<String>();
                     for(int n=0;n<inProject.length;n++){
                         if(inProject[n]==true){
                             users.add(((User)adapter.getItem(n)).getUsername());
+                            hworkers.add(((User)adapter.getItem(n)).getUsername());
                         }
                     }
                     String[] userArray = new String[users.size()];
@@ -72,7 +75,6 @@ public class AddWorker extends AppCompatActivity {
                         userArray[n]=users.get(n);
                     }
                     Boolean [] asHeadworker = adapter.getAsHeadWorker();
-                    ArrayList<String> hworkers= new ArrayList<String>();
                     for(int n=0;n<inProject.length;n++){
                         if(asHeadworker[n]==true){
                             hworkers.add(((User)adapter.getItem(n)).getUsername());
@@ -87,7 +89,9 @@ public class AddWorker extends AppCompatActivity {
                     workerArray[0]=users.get(0);
 
                     Intent intent = new Intent(context, HomeScreen.class);
+                    Toast.makeText(context, "Project created", Toast.LENGTH_SHORT).show();
 
+                    //should open the project screen
                     Project newProject=new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, null, null, userArray, hworkerarray, "Not started");
                     ProjectService.create(newProject, context);
                     startActivity(intent);

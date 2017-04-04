@@ -54,10 +54,42 @@
         android:onClick="createWorkerGroup"
         android:text="@string/create_worker_group" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/getActiveWorkers"
+        android:id="@+id/lineal">
+
+        <CheckBox
+            android:id="@+id/chbongoing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:text="Show ongoing" />
+
+        <CheckBox
+            android:id="@+id/chbnotstarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:text="Show not started" />
+
+        <CheckBox
+            android:id="@+id/chbfinished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:text="Show finished" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/getActiveWorkers"
+        android:layout_below="@+id/lineal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/errorText"
