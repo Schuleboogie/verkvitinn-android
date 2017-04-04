@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import is.hi.verkvitinn.persistence.repositories.MilestoneRepository;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
@@ -25,8 +28,16 @@ public class SeeActiveWorkers extends AppCompatActivity {
         Long projectid = Long.parseLong(getIntent().getStringExtra("PROJECT_ID"));
         this.projectService = new ProjectService(projectRepository, milestoneRepository);
         ListView activeWorkerList = (ListView) findViewById(R.id.activeWorkerList);
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, projectService.getOnCall(projectid, this));
-        activeWorkerList.setAdapter(itemsAdapter);
+        ArrayList<String> active = projectService.getOnCall(projectid, this);
+        TextView texti = (TextView)findViewById(R.id.texti);
+        if(active.size()>0){
+            texti.setText("Theese workers are active right now");
+            ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, active);
+            activeWorkerList.setAdapter(itemsAdapter);
+        }
+        else{
+            texti.setText("There are no workers active at the moment");
+        }
     }
 
 }
