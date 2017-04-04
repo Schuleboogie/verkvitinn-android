@@ -52,7 +52,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         }
         else {
-            userService.register(username, password, "admin", "Skúli Ingvarsson", this);
+            auth= false;
         }
         // If user has authentication, proceed
         if (auth) {

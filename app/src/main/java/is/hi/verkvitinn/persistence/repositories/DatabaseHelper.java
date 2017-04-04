@@ -40,7 +40,7 @@ public abstract class DB extends SQLiteOpenHelper {
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Verkvitinn.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String USERS_TABLE_CREATE = "CREATE TABLE users(id integer primary key,"
             + "username varchar(255),"
             + "password varchar(255),"
@@ -76,6 +76,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "status varchar(255)"
             + ");";
 
+    private static final String USERS_INSERT = "INSERT INTO users (id, username, password, role, name, headworker) VALUES "
+            + "(1, 'sunna', 'sunna', 'worker', 'Sunna Halldórsdóttir', 0), "
+            + "(2, 'skúli', 'skúli', 'admin', 'Skúli Ingvarsson', 0), "
+            + "(3, 'sölvi', 'sölvi', 'worker', 'Sölvi Már Magnússon', 0), "
+            + "(4, 'ragnheiður', 'ragnheiður', 'admin', 'Ragnheiður Sveinsdóttir', 0), "
+            + "(5, 'viktor', 'viktor', 'worker', 'Viktor Ýmir', 0), "
+            + "(6, 'bjöggi', 'bjöggi', 'admin', 'Björgvinn Halldórsson', 0), "
+            + "(7, 'ástrós', 'ástrós', 'worker', 'Ástrós Einarsdóttir', 0), "
+            + "(8, 'worker1', 'worker1', 'admin', 'Worker Test', 0) ";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -85,6 +94,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(PROJECTS_TABLE_CREATE);
         db.execSQL(GROUPS_TABLE_CREATE);
         db.execSQL(MILESTONES_TABLE_CREATE);
+        db.execSQL(USERS_INSERT);
+
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQL_DELETE_USERS);
