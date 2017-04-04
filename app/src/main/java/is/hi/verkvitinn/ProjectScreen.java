@@ -112,8 +112,11 @@ public class ProjectScreen extends AppCompatActivity {
             Button checkout = (Button)findViewById(R.id.checkout);
 
             Boolean shouldCheckout = projectService.shouldCheckout(username, projectId, this);
-
-            if(shouldCheckout){
+            if(adminString.equals("admin")){
+                checkin.setVisibility(GONE);
+                checkout.setVisibility(GONE);
+            }
+            else if(shouldCheckout){
                 checkout.setVisibility(VISIBLE);
                 checkin.setVisibility(GONE);
             }
@@ -141,7 +144,7 @@ public class ProjectScreen extends AppCompatActivity {
             if(!canAdd){
                 startProjectButton.setVisibility(GONE);
                 finishProjectButton.setVisibility(GONE);
-                seeActiveButton.setVisibility(GONE);
+                seeActiveButton.setVisibility(INVISIBLE);
             }
 
 

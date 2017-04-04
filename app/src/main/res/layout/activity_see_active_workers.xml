@@ -12,6 +12,13 @@
         android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Theese workers are active right now"
+            android:textSize="22dp"/>
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="500dp"
