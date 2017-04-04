@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import SessionManagement.SessionManager;
 import is.hi.verkvitinn.persistence.entities.User;
 import is.hi.verkvitinn.persistence.repositories.UserRepository;
 import is.hi.verkvitinn.service.UserService;
@@ -25,6 +26,7 @@ public class LoginScreen extends AppCompatActivity {
     private EditText usernameText;
     private EditText passwordText;
     private TextView errorText;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class LoginScreen extends AppCompatActivity {
         usernameText = (EditText) findViewById(R.id.username);
         passwordText = (EditText) findViewById(R.id.password);
         errorText = (TextView) findViewById(R.id.signInMessage);
+        session = new SessionManager(getApplicationContext());
     }
     /** Called when the user clicks the Send button */
     public void login(View view) {
@@ -53,6 +56,7 @@ public class LoginScreen extends AppCompatActivity {
         }
         // If user has authentication, proceed
         if (auth) {
+            session.createLoginSession(username, "admin");
             Intent intent = new Intent(this, HomeScreen.class);
             startActivity(intent);
         }

@@ -105,7 +105,9 @@ public class HomeScreen extends AppCompatActivity {
             if (foundProjects != null) {
                 ProjectList adapter = new ProjectList(this, android.R.layout.simple_list_item_1, foundProjects);
                 projectList.setAdapter(adapter);
+                errorText.setText("");
             } else {
+                projectList.setVisibility(INVISIBLE);
                 errorText.setText("No projects found");
             }
         }

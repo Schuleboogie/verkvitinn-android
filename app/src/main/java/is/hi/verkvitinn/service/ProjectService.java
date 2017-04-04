@@ -1,6 +1,7 @@
 package is.hi.verkvitinn.service;
 
 import android.content.Context;
+import android.util.Log;
 
 import is.hi.verkvitinn.BuildConfig;
 import is.hi.verkvitinn.persistence.entities.Project;
@@ -51,6 +52,7 @@ public class ProjectService {
 		if(finsihed)
 			statusquery = statusquery + "'Finished'";
 		statusquery = statusquery+")";
+		Log.d(statusquery, "query");
 		return projects.findByUserAndStatus(user, statusquery, context);
 	}
 
