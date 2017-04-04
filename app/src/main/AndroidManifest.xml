@@ -60,7 +60,11 @@
         <activity android:name=".AddWorker" />
         <activity android:name=".Milestones" />
         <activity android:name=".SetMilestone" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".SeeActiveWorkers"
+            android:label="@string/title_activity_see_active_workers"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
