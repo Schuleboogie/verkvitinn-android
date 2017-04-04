@@ -8,9 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import is.hi.verkvitinn.persistence.entities.Log;
 import is.hi.verkvitinn.persistence.entities.Milestone;
+import is.hi.verkvitinn.persistence.entities.User;
 
 /**
  * Created by sunna on 4.4.2017.
@@ -66,5 +68,19 @@ public class LogRepository {
         if(cursor.getCount()>0)
             return true;
         return false;
+    }
+
+    public static ArrayList<String> getOnCall(Long projectId, Context context){
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+        String select = "Select * from log where projectId="+projectId+" and timeOut=''";
+        Cursor cursor = readDB.rawQuery(select, null);
+        ArrayList<String> onCall=new ArrayList<>();
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false) {
+            onCall.add(cursor.getString(3));
+            cursor.moveToNext();
+        }
+        return onCall;
     }
 }

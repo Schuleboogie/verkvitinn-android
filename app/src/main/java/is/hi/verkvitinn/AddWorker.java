@@ -67,7 +67,6 @@ public class AddWorker extends AppCompatActivity {
                     for(int n=0;n<inProject.length;n++){
                         if(inProject[n]==true){
                             users.add(((User)adapter.getItem(n)).getUsername());
-                            hworkers.add(((User)adapter.getItem(n)).getUsername());
                         }
                     }
                     String[] userArray = new String[users.size()];

@@ -44,6 +44,11 @@ public class ProjectService {
 		return logRepository.sholdCheckout(username, projectId, context);
 	}
 
+	public ArrayList<String> getOnCall(Long projectId, Context context){
+		LogRepository logRepository = new LogRepository();
+		return logRepository.getOnCall(projectId, context);
+	}
+
 	public List<Project> findByUserAndStatus(String user, boolean onGoing, boolean notStarted, boolean finsihed, Context context){
 		ArrayList<String> status = new ArrayList<>();
 		String statusquery = "( ";

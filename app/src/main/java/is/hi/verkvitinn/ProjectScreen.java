@@ -33,10 +33,12 @@ public class ProjectScreen extends AppCompatActivity {
     private TextView projectName;
     private Button startProjectButton;
     private Button finishProjectButton;
+    private Button seeActiveButton;
     private Long projectId;
     private SessionManager session;
     private String adminString;
     private String username;
+
 
     public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
     public static final String PROJECT_EDIT = "is.hi.verkvitinn.PROJECT_EDIT";
@@ -81,6 +83,7 @@ public class ProjectScreen extends AppCompatActivity {
         projectName = (TextView) findViewById(R.id.tv_projectName);
         startProjectButton = (Button) findViewById(R.id.startProjectButton);
         finishProjectButton = (Button) findViewById(R.id.finishProjectButton);
+        seeActiveButton = (Button)findViewById(R.id.seeActive);
 
         Project p = projectService.findOne(projectId, this);
         if (p != null) {
@@ -138,6 +141,7 @@ public class ProjectScreen extends AppCompatActivity {
             if(!canAdd){
                 startProjectButton.setVisibility(GONE);
                 finishProjectButton.setVisibility(GONE);
+                seeActiveButton.setVisibility(GONE);
             }
 
 
@@ -201,6 +205,12 @@ public class ProjectScreen extends AppCompatActivity {
         checkin.setVisibility(VISIBLE);
         Log updatedLog = new Log(projectId, null, Calendar.getInstance().getTime(), username);
         projectService.updateLog(updatedLog, this);
+    }
+
+    public void seeActive(View view){
+        Intent intent = new Intent(this, SeeActiveWorkers.class);
+        intent.putExtra("PROJECT_ID",  "" + this.projectId);
+        startActivity(intent);
     }
 
     public void finishProject(View view) {

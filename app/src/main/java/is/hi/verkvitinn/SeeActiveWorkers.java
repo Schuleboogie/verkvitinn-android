@@ -6,24 +6,27 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import is.hi.verkvitinn.persistence.repositories.MilestoneRepository;
+import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
+import is.hi.verkvitinn.service.ProjectService;
 
 public class SeeActiveWorkers extends AppCompatActivity {
+    ProjectService projectService;
+    ProjectRepository projectRepository;
+    MilestoneRepository milestoneRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_active_workers);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        Long projectid = Long.parseLong(getIntent().getStringExtra("PROJECT_ID"));
+        this.projectService = new ProjectService(projectRepository, milestoneRepository);
+        ListView activeWorkerList = (ListView) findViewById(R.id.activeWorkerList);
+        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, projectService.getOnCall(projectid, this));
+        activeWorkerList.setAdapter(itemsAdapter);
     }
 
 }
