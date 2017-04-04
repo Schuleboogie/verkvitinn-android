@@ -67,6 +67,7 @@ public class UserRepository {
 		}
 		else return null;
 	}
+
 	public static List<User> findByRole(String role, Context context) {
 		DatabaseHelper dbHelper = new DatabaseHelper(context);
 		SQLiteDatabase readDB = dbHelper.getReadableDatabase();

@@ -236,4 +236,26 @@
         android:onClick="seeMilestones"
         android:text="See milestones" />
 
+    <Button
+        android:id="@+id/checkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_tools"
+        android:background="@android:color/holo_green_dark"
+        android:onClick="checkin"
+        android:text="Check in" />
+
+    <Button
+        android:id="@+id/checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_tools"
+        android:background="@android:color/holo_red_light"
+        android:text="Check out"
+        android:visibility="gone"/>
+
 </RelativeLayout>

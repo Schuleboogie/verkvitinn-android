@@ -4,7 +4,6 @@ import android.app.LauncherActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import SessionManagement.SessionManager;
+import is.hi.verkvitinn.persistence.entities.Log;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
 import is.hi.verkvitinn.service.ProjectService;
@@ -154,11 +155,13 @@ public class ProjectScreen extends AppCompatActivity {
         intent.putExtra(PROJECT_LOCATION, projectLocation);
         startActivity(intent);
     }
+
     public void seeMilestones(View view) {
         Intent intent = new Intent(this, Milestones.class);
         intent.putExtra(PROJECT_ID, this.projectId);
         startActivity(intent);
     }
+
     public void startProject(View view) {
         if (projectService.startProject(this.projectId, this)) {
             TextView status = (TextView) findViewById(R.id.tv_status);
@@ -168,6 +171,16 @@ public class ProjectScreen extends AppCompatActivity {
         }
         else Toast.makeText(this, "Project could not be started", Toast.LENGTH_SHORT).show();
     }
+
+    public void checkin(View view){
+        Log newlog = new Log(projectId, Calendar.getInstance().getTime(), null, username);
+        projectService.addToLog(newlog, this);
+    }
+
+    public void checkout(View view){
+
+    }
+
     public void finishProject(View view) {
         if (projectService.finishProject(this.projectId, this)) {
             Toast.makeText(this, "Project finished", Toast.LENGTH_SHORT).show();

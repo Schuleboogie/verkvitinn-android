@@ -66,29 +66,19 @@
         android:layout_below="@+id/projectTools"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="40dp"
         android:hint="Estimated Time" />
 
-    <Button
-        android:text="Submit project"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/submitProjectButton"
-        android:layout_alignRight="@+id/projectEstTime"
-        android:layout_alignEnd="@+id/projectEstTime"
-        android:onClick="createProject" />
 
     <Button
         android:text="Assign workers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/submitProjectButton"
+        android:layout_below="@+id/projectEstTime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/button4"
-        android:layout_alignRight="@+id/submitProjectButton"
-        android:layout_alignEnd="@+id/submitProjectButton"
+        android:layout_alignRight="@+id/projectEstTime"
+        android:layout_alignEnd="@+id/projectEstTime"
         android:onClick="assignWorkers" />
 </RelativeLayout>

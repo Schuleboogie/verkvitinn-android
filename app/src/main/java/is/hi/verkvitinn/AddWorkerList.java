@@ -96,7 +96,7 @@ public class AddWorkerList extends ArrayAdapter {
                 }
                 else{
                     cb_setWorker.setChecked(false);
-                    inGroup[id]=false;
+                    inGroup[id]=true;
                     cb_setWorker.setEnabled(false);
                     asHeadWorker[id]=true;
                 }

@@ -1,11 +1,12 @@
 package is.hi.verkvitinn.service;
 
 import android.content.Context;
-import android.util.Log;
 
 import is.hi.verkvitinn.BuildConfig;
+import is.hi.verkvitinn.persistence.entities.Log;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.entities.Milestone;
+import is.hi.verkvitinn.persistence.repositories.LogRepository;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
 import is.hi.verkvitinn.persistence.repositories.MilestoneRepository;
 
@@ -52,8 +53,16 @@ public class ProjectService {
 		if(finsihed)
 			statusquery = statusquery + "'Finished'";
 		statusquery = statusquery+")";
-		Log.d(statusquery, "query");
 		return projects.findByUserAndStatus(user, statusquery, context);
+	}
+
+
+	public boolean addToLog(Log newLog, Context context){
+		LogRepository logRepository = new LogRepository();
+		if(logRepository.save(newLog, context)!=null){
+			return true;
+		}
+		return false;
 	}
 
 	public List<Project> findByAdminAndStatus(String admin, boolean onGoing, boolean notStarted, boolean finsihed, Context context){
@@ -70,7 +79,6 @@ public class ProjectService {
 		if(finsihed)
 			statusquery = statusquery + "'Finished'";
 		statusquery = statusquery+")";
-		Log.d(statusquery, "query");
 		return projects.findByAdminAndStatus(admin, statusquery, context);
 	}
 
