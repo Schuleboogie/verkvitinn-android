@@ -2,6 +2,7 @@ package is.hi.verkvitinn.service;
 
 import android.content.Context;
 
+import is.hi.verkvitinn.BuildConfig;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.entities.Milestone;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
@@ -35,6 +36,24 @@ public class ProjectService {
 	public List<Project> findByAdmin(String admin, Context context) {
 		return projects.findByAdmin(admin, context);
 	}
+
+	public List<Project> findByUserAndStatus(String user, boolean onGoing, boolean notStarted, boolean finsihed, Context context){
+		ArrayList<String> status = new ArrayList<>();
+		String statusquery = "( ";
+		if(onGoing)
+			statusquery = statusquery+ "'In progress'";
+		if(onGoing&&(notStarted||finsihed))
+			statusquery = statusquery +", ";
+		if(notStarted)
+			statusquery = statusquery + "'Not started'";
+		if(notStarted&&finsihed)
+			statusquery = statusquery +", ";
+		if(finsihed)
+			statusquery = statusquery + "'Finished'";
+		statusquery = statusquery+")";
+		return projects.findByUserAndStatus(user, statusquery, context);
+	}
+
 
 	// Find project by id
 	public Project findOne(Long id, Context context) {

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,8 +36,15 @@ public class HomeScreen extends AppCompatActivity {
         projectList = (ListView) findViewById(R.id.projectList);
         dbBrowser = (Button) findViewById(R.id.getActiveWorkers);
 
+        final CheckBox chbongoing = (CheckBox) findViewById(R.id.chbongoing);
+        final CheckBox chbnotstarted = (CheckBox) findViewById(R.id.chbnotstarted);
+        final CheckBox chbfinished = (CheckBox) findViewById(R.id.chbfinished);
+        chbongoing.setChecked(true);
+        chbnotstarted.setChecked(true);
+        chbfinished.setChecked(true);
+
         // Display projects
-        displayProjects();
+        displayProjects(true, true, true);
 
         // Set up DB browser
         final Activity r = this;
@@ -46,11 +54,35 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(dbmanager);
             }
         });
+
+        chbfinished.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                displayProjects(chbongoing.isChecked(), chbnotstarted.isChecked(), chbfinished.isChecked());
+            }
+        });
+
+        chbnotstarted.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                displayProjects(chbongoing.isChecked(), chbnotstarted.isChecked(), chbfinished.isChecked());
+            }
+        });
+
+        chbongoing.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                displayProjects(chbongoing.isChecked(), chbnotstarted.isChecked(), chbfinished.isChecked());
+            }
+        });
     }
     @Override
     protected void onStart() {
         super.onStart();
-        displayProjects();
+        displayProjects(true, true, true);
     }
     public void createProject(View view) {
         Intent intent = new Intent(this, CreateProject.class);
@@ -62,14 +94,20 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void displayProjects() {
-        List<Project> foundProjects = projectService.findByAdmin("Skúli Ingvarsson", this);
-        if (foundProjects != null) {
-            ProjectList adapter = new ProjectList(this, android.R.layout.simple_list_item_1, foundProjects);
-            projectList.setAdapter(adapter);
-        }
-        else {
+    private void displayProjects(boolean onGoing, boolean notStarted, boolean finished) {
+        if(!onGoing&&!notStarted&&!finished){
+            projectList.setVisibility(INVISIBLE);
             errorText.setText("No projects found");
+        }
+        else{
+            projectList.setVisibility(VISIBLE);
+            List<Project> foundProjects = projectService.findByUserAndStatus("sunna", onGoing, notStarted, finished, this);
+            if (foundProjects != null) {
+                ProjectList adapter = new ProjectList(this, android.R.layout.simple_list_item_1, foundProjects);
+                projectList.setAdapter(adapter);
+            } else {
+                errorText.setText("No projects found");
+            }
         }
     }
 }
