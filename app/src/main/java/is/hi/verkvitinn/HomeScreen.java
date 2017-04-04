@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 
+import SessionManagement.SessionManager;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
 import is.hi.verkvitinn.service.ProjectService;
@@ -25,9 +28,23 @@ public class HomeScreen extends AppCompatActivity {
     private TextView errorText;
     private ListView projectList;
     private Button dbBrowser;
+    private SessionManager session;
+    private String username;
+    private String admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        username = user.get(SessionManager.KEY_NAME);
+
+        // admin
+        admin = user.get(SessionManager.KEY_ADMIN);
+        Log.d(admin, "þetta er admininn");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         this.projectService = new ProjectService(projects, null);
@@ -42,6 +59,21 @@ public class HomeScreen extends AppCompatActivity {
         chbongoing.setChecked(true);
         chbnotstarted.setChecked(true);
         chbfinished.setChecked(true);
+
+        Button createProject = (Button)findViewById(R.id.createProjectButton);
+        Button createGroup = (Button)findViewById(R.id.button2);
+        Button getActiveWorkers = (Button)findViewById(R.id.getActiveWorkers);
+
+        if(!admin.equals("admin")){
+            createProject.setVisibility(GONE);
+            createGroup.setVisibility(GONE);
+            getActiveWorkers.setVisibility(GONE);
+        }
+        else{
+            createProject.setVisibility(VISIBLE);
+            createGroup.setVisibility(VISIBLE);
+            getActiveWorkers.setVisibility(VISIBLE);
+        }
 
         // Display projects
         displayProjects(true, true, true);
@@ -101,7 +133,13 @@ public class HomeScreen extends AppCompatActivity {
         }
         else{
             projectList.setVisibility(VISIBLE);
-            List<Project> foundProjects = projectService.findByUserAndStatus("sunna", onGoing, notStarted, finished, this);
+            List<Project> foundProjects;
+            if(!admin.equals("admin")) {
+                foundProjects = projectService.findByUserAndStatus(username, onGoing, notStarted, finished, this);
+            }
+            else{
+                foundProjects = projectService.findByAdminAndStatus(username, onGoing, notStarted, finished, this);
+            }
             if (foundProjects != null) {
                 ProjectList adapter = new ProjectList(this, android.R.layout.simple_list_item_1, foundProjects);
                 projectList.setAdapter(adapter);

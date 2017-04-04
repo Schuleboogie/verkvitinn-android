@@ -52,11 +52,11 @@ public class LoginScreen extends AppCompatActivity {
             }
         }
         else {
-            userService.register(username, password, "worker", "Skúli Ingvarsson", this);
+            userService.register(username, password, "admin", "Skúli Ingvarsson", this);
         }
         // If user has authentication, proceed
         if (auth) {
-            session.createLoginSession(username, "admin");
+            session.createLoginSession(username, userService.findByUsername(username, this).getRole());
             Intent intent = new Intent(this, HomeScreen.class);
             startActivity(intent);
         }

@@ -56,6 +56,24 @@ public class ProjectService {
 		return projects.findByUserAndStatus(user, statusquery, context);
 	}
 
+	public List<Project> findByAdminAndStatus(String admin, boolean onGoing, boolean notStarted, boolean finsihed, Context context){
+		ArrayList<String> status = new ArrayList<>();
+		String statusquery = "( ";
+		if(onGoing)
+			statusquery = statusquery+ "'In progress'";
+		if(onGoing&&(notStarted||finsihed))
+			statusquery = statusquery +", ";
+		if(notStarted)
+			statusquery = statusquery + "'Not started'";
+		if(notStarted&&finsihed)
+			statusquery = statusquery +", ";
+		if(finsihed)
+			statusquery = statusquery + "'Finished'";
+		statusquery = statusquery+")";
+		Log.d(statusquery, "query");
+		return projects.findByAdminAndStatus(admin, statusquery, context);
+	}
+
 
 	// Find project by id
 	public Project findOne(Long id, Context context) {

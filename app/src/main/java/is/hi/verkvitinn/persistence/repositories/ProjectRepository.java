@@ -155,9 +155,46 @@ public class ProjectRepository {
 	public static List<Project> findByUserAndStatus(String user, String statusquery, Context context){
 		DatabaseHelper dbHelper = new DatabaseHelper(context);
 		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
-		String selection = "admin = ?";
-		String[] selectionArgs = { user };
 		String query = "select * from projects where workers like '%"+user+"%' and status  in " + statusquery;
+		//String query = "select * from projects where status  in " + statusquery;
+
+		Cursor results = readDB.rawQuery(query, null);
+		List<Project> foundProjects = new ArrayList<Project>();
+		if (results.getCount() > 0) {
+			Project foundProject = null;
+			results.moveToFirst();
+			while (results.isAfterLast() == false) {
+				// Conversions
+				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
+				Date startTime = null;
+				Date finishTime = null;
+				try {
+					startTime = formatter.parse(results.getString(7));
+					finishTime = formatter.parse(results.getString(8));
+				}
+				catch (ParseException e) {
+					// He he
+				}
+				Log.d(results.getString(9), "workers");
+				String[] workers = convertStringToArray(results.getString(9));
+				String[] headWorkers = convertStringToArray(results.getString(10));
+				Log.d(results.getString(0), "--id");
+				foundProject = new Project(results.getString(1), results.getString(2), results.getString(3), results.getString(4), results.getString(5), results.getString(6), startTime, finishTime, workers, headWorkers, results.getString(11));
+				foundProject.setId(Long.valueOf(results.getInt(0)));
+				foundProjects.add(foundProject);
+				results.moveToNext();
+			}
+			results.close();
+			return foundProjects;
+		}
+		else return null;
+	}
+
+
+	public static List<Project> findByAdminAndStatus(String user, String statusquery, Context context){
+		DatabaseHelper dbHelper = new DatabaseHelper(context);
+		SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+		String query = "select * from projects where admin ='"+user+"' and status  in " + statusquery;
 		//String query = "select * from projects where status  in " + statusquery;
 
 		Cursor results = readDB.rawQuery(query, null);

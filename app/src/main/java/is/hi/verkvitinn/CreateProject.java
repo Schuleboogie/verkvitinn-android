@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.HashMap;
 
+import SessionManagement.SessionManager;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
 import is.hi.verkvitinn.service.ProjectService;
@@ -23,12 +25,25 @@ public class CreateProject extends AppCompatActivity {
     private EditText projectLocationField;
     private EditText projectToolsField;
     private EditText projectEstTimeField;
+    private String admin;
+    private String username;
+    private SessionManager session;
 
     private Long projectId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        username = user.get(SessionManager.KEY_NAME);
+
+
         setContentView(R.layout.activity_create_project);
         this.projectService = new ProjectService(projects, null);
 
@@ -75,7 +90,7 @@ public class CreateProject extends AppCompatActivity {
         String projectTools = projectToolsField.getText().toString();
         String projectEstTime = projectEstTimeField.getText().toString();
         // Assign admin hér
-        String admin = "Skúli Ingvarsson";
+        String admin = username;
         Intent intent = new Intent(this, AddWorkerGroup.class);
         intent.putExtra("projectName", projectName);
         intent.putExtra("admin", admin);

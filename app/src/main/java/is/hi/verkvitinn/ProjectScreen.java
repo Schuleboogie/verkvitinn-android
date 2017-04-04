@@ -13,10 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import SessionManagement.SessionManager;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
 import is.hi.verkvitinn.service.ProjectService;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class ProjectScreen extends AppCompatActivity {
     ProjectService projectService;
@@ -26,6 +31,8 @@ public class ProjectScreen extends AppCompatActivity {
     private Button startProjectButton;
     private Button finishProjectButton;
     private Long projectId;
+    private SessionManager session;
+    private String admin;
 
     public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
     public static final String PROJECT_EDIT = "is.hi.verkvitinn.PROJECT_EDIT";
@@ -34,8 +41,25 @@ public class ProjectScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        admin = user.get(SessionManager.KEY_ADMIN);
+
         setContentView(R.layout.activity_project_screen);
         this.projectService = new ProjectService(projects, null);
+
+
+        Button editProjectButton = (Button) findViewById(R.id.editProjectButton);
+
+        if(!admin.equals("admin")){
+            editProjectButton.setVisibility(GONE);
+        }
+        else{
+            editProjectButton.setVisibility(VISIBLE);
+        }
 
         // Enable back button
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,11 +98,11 @@ public class ProjectScreen extends AppCompatActivity {
             estFinish.setText(p.getFinishTime().toString());*/
             status.setText(p.getStatus());
             if (p.getStatus().equals("In progress")) {
-                startProjectButton.setVisibility(View.GONE);
-                finishProjectButton.setVisibility(View.VISIBLE);
+                startProjectButton.setVisibility(GONE);
+                finishProjectButton.setVisibility(VISIBLE);
             }
             else if (p.getStatus().equals("Finished")) {
-                startProjectButton.setVisibility(View.GONE);
+                startProjectButton.setVisibility(GONE);
             }
 
 
@@ -119,7 +143,7 @@ public class ProjectScreen extends AppCompatActivity {
             TextView status = (TextView) findViewById(R.id.tv_status);
             status.setText("In progress");
             // Show finish project button
-            finishProjectButton.setVisibility(View.VISIBLE);
+            finishProjectButton.setVisibility(VISIBLE);
         }
         else Toast.makeText(this, "Project could not be started", Toast.LENGTH_SHORT).show();
     }
@@ -129,7 +153,7 @@ public class ProjectScreen extends AppCompatActivity {
             TextView status = (TextView) findViewById(R.id.tv_status);
             status.setText("Finished");
             // Hide finish project button
-            finishProjectButton.setVisibility(View.GONE);
+            finishProjectButton.setVisibility(GONE);
         }
         else Toast.makeText(this, "Project could not be finished", Toast.LENGTH_SHORT).show();
     }
