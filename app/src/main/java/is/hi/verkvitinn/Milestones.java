@@ -11,8 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import SessionManagement.SessionManager;
 import is.hi.verkvitinn.persistence.entities.Milestone;
 import is.hi.verkvitinn.persistence.entities.Project;
 import is.hi.verkvitinn.persistence.repositories.MilestoneRepository;
@@ -23,6 +25,9 @@ public class Milestones extends AppCompatActivity {
     ProjectService projectService;
     MilestoneRepository milestones;
     ProjectRepository projects;
+    SessionManager session;
+    private String username;
+    private String admin;
 
     private Long projectId;
     public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
@@ -42,6 +47,31 @@ public class Milestones extends AppCompatActivity {
         Intent intent = getIntent();
         Long projectId = intent.getLongExtra(ProjectScreen.PROJECT_ID, -1);
         this.projectId = projectId;
+
+        String[] headworkers = projectService.findOne(projectId, this).getHeadWorkers();
+
+        session = new SessionManager(getApplicationContext());
+
+        HashMap<String, String> user = session.getUserDetails();
+
+        // name
+        username = user.get(SessionManager.KEY_NAME);
+
+        // admin
+        admin = user.get(SessionManager.KEY_ADMIN);
+
+        Boolean canAdd=admin.equals("admin");
+        if(!canAdd){
+            for(int n=0;n<headworkers.length;n++){
+                if(headworkers[n].equals(username))
+                    canAdd=true;
+            }
+        }
+        Button milestones = (Button) findViewById(R.id.button7);
+        if(canAdd)
+            milestones.setVisibility(View.VISIBLE);
+        else
+            milestones.setVisibility(View.INVISIBLE);
 
         List<Milestone> foundMilestones = projectService.findMilestones(projectId, this);
         if (foundMilestones != null) {

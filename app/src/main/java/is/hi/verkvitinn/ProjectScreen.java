@@ -21,6 +21,7 @@ import is.hi.verkvitinn.persistence.repositories.ProjectRepository;
 import is.hi.verkvitinn.service.ProjectService;
 
 import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 public class ProjectScreen extends AppCompatActivity {
@@ -55,7 +56,7 @@ public class ProjectScreen extends AppCompatActivity {
         Button editProjectButton = (Button) findViewById(R.id.editProjectButton);
 
         if(!admin.equals("admin")){
-            editProjectButton.setVisibility(GONE);
+            editProjectButton.setVisibility(INVISIBLE);
         }
         else{
             editProjectButton.setVisibility(VISIBLE);

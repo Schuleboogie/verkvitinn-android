@@ -43,7 +43,6 @@ public class HomeScreen extends AppCompatActivity {
 
         // admin
         admin = user.get(SessionManager.KEY_ADMIN);
-        Log.d(admin, "þetta er admininn");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
