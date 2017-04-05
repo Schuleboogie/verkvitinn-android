@@ -40,7 +40,7 @@ public abstract class DB extends SQLiteOpenHelper {
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Verkvitinn.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String USERS_TABLE_CREATE = "CREATE TABLE users(id integer primary key,"
             + "username varchar(255),"
             + "password varchar(255),"
@@ -59,11 +59,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "timestamp text,"
             + "title varchar(255)"
             + ");";
+    private static final String MESSAGES_TABLE_CREATE = "CREATE TABLE messages(id integer primary key,"
+            + "projectId integer,"
+            + "timestamp text,"
+            + "author varchar(255),"
+            + "admin boolean,"
+            + "headworker boolean,"
+            + "content varchar(255)"
+            + ");";
 
     private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS users;";
     private static final String SQL_DELETE_PROJECTS = "DROP TABLE IF EXISTS projects;";
     private static final String SQL_DELETE_GROUPS = "DROP TABLE IF EXISTS groups;";
     private static final String SQL_DELETE_MILESTONES = "DROP TABLE IF EXISTS milestones;";
+    private static final String SQL_DELETE_LOGS = "DROP TABLE IF EXISTS log;";
+    private static final String SQL_DELETE_MESSAGES = "DROP TABLE IF EXISTS messages;";
 
     private static final String PROJECTS_TABLE_CREATE = "CREATE TABLE projects(id integer primary key,"
             + "name varchar(255),"
@@ -105,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(GROUPS_TABLE_CREATE);
         db.execSQL(MILESTONES_TABLE_CREATE);
         db.execSQL(LOG_TABLE_CREATE);
+        db.execSQL(MESSAGES_TABLE_CREATE);
         db.execSQL(USERS_INSERT);
 
     }
@@ -113,6 +124,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_PROJECTS);
         db.execSQL(SQL_DELETE_GROUPS);
         db.execSQL(SQL_DELETE_MILESTONES);
+        db.execSQL(SQL_DELETE_MESSAGES);
+        db.execSQL(SQL_DELETE_LOGS);
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
