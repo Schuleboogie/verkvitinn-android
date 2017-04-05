@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import SessionManagement.SessionManager;
@@ -197,7 +198,8 @@ public class ProjectScreen extends AppCompatActivity {
         Button checkout = (Button)findViewById(R.id.checkout);
         checkout.setVisibility(VISIBLE);
         checkin.setVisibility(GONE);
-        Log newlog = new Log(projectId, Calendar.getInstance().getTime(), null, username);
+        System.out.println(new Date());
+        Log newlog = new Log(projectId, new Date(), null, username);
         projectService.addToLog(newlog, this);
     }
 
@@ -206,7 +208,7 @@ public class ProjectScreen extends AppCompatActivity {
         Button checkout = (Button)findViewById(R.id.checkout);
         checkout.setVisibility(GONE);
         checkin.setVisibility(VISIBLE);
-        Log updatedLog = new Log(projectId, null, Calendar.getInstance().getTime(), username);
+        Log updatedLog = new Log(projectId, null, new Date(), username);
         projectService.updateLog(updatedLog, this);
     }
 

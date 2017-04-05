@@ -81,7 +81,7 @@ public class HomeScreen extends AppCompatActivity {
         final Activity r = this;
         dbBrowser.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                Intent dbmanager = new Intent(r, AndroidDatabaseManager.class);
+                Intent dbmanager = new Intent(r, ShowLog.class);
                 startActivity(dbmanager);
             }
         });

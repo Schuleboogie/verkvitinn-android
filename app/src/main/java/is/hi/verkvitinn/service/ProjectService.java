@@ -49,6 +49,12 @@ public class ProjectService {
 		return logRepository.getOnCall(projectId, context);
 	}
 
+
+	public ArrayList<Log> getForAdmin(Context context){
+		LogRepository logRepository = new LogRepository();
+		return logRepository.getForAdmin(context);
+	}
+
 	public List<Project> findByUserAndStatus(String user, boolean onGoing, boolean notStarted, boolean finsihed, Context context){
 		ArrayList<String> status = new ArrayList<>();
 		String statusquery = "( ";
