@@ -72,8 +72,8 @@ public class AddWorker extends AppCompatActivity {
 
         if(users!=null){
             final AddWorkerList adapter = new AddWorkerList(this, android.R.layout.simple_list_item_1, users, groupUser, groupHeadworkers);
-            final Context context = this;
             workerList.setAdapter(adapter);
+            final Context context = this;
             Button submitGroupButton = (Button)findViewById(R.id.submitWorkersButton);
             submitGroupButton.setOnClickListener(new View.OnClickListener() {
                 @Override

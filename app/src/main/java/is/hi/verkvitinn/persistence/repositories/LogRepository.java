@@ -29,11 +29,11 @@ public class LogRepository {
 
         // Date conversion
         String timestampin = "";
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
-
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.sss");
         if(newLog.getTimeIn()!=null){
             timestampin = formatter.format(newLog.getTimeIn());
         }
+        System.out.println(newLog.getTimeIn() + "--||--" + timestampin);
 
 
         ContentValues log = new ContentValues();
@@ -52,7 +52,7 @@ public class LogRepository {
 
 
         String timestampout = "";
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.sss");
 
 
         if(updateLog.getTimeOut()!=null){
@@ -95,18 +95,18 @@ public class LogRepository {
         ArrayList<Log> forAdmin=new ArrayList<>();
         cursor.moveToFirst();
         while (cursor.isAfterLast() == false) {
+            System.out.println(cursor.getString(1)+ "straight from the daybeis");
 
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.sss");
             Date timeIn = null;
             try {
                 timeIn = formatter.parse(cursor.getString(1));
             }
             catch (ParseException e) {
-                System.out.println("villa í timeIn conversion");
             }
             Date timeOut = null;
             try {
-                timeOut = formatter.parse(cursor.getString(1));
+                timeOut = formatter.parse(cursor.getString(2));
             }
             catch (ParseException e) {
                 System.out.println("villa í timeOut conversion");

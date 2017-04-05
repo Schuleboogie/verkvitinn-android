@@ -22,27 +22,25 @@ public class loglist extends ArrayAdapter {
     List<User> workers;
     private static LayoutInflater inflater = null;
     private Boolean[] inGroup;
+    List<String[]> logs;
     public static final String PROJECT_ID = "is.hi.verkvitinn.MESSAGE";
 
-    public loglist(Context context, int resource, List<User> workers) {
-        super(context, resource, workers);
+    public loglist(Context context, int resource, List<String[]> logs) {
+        super(context, resource, logs);
+        this.logs=logs;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.workers = workers;
-        inGroup = new Boolean[workers.size()];
-        for(int n=0;n<workers.size();n++){
-            inGroup[n]=false;
-        }
+
     }
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return workers.size();
+        return logs.size();
     }
 
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        return workers.get(position);
+        return logs.get(position);
     }
 
     @Override
@@ -57,25 +55,14 @@ public class loglist extends ArrayAdapter {
         if (vi == null)
             vi = inflater.inflate(R.layout.loglist, null);
         // Set information
-        TextView workerName = (TextView) vi.findViewById(R.id.wName);
-        TextView workerUName = (TextView) vi.findViewById(R.id.wUName);
-        final User tworkers = workers.get(i);
-        workerName.setText(tworkers.getName());
-        final int id = i;
-        workerUName.setText(tworkers.getUsername());
-        CheckBox cb_setWorker = (CheckBox) vi.findViewById(R.id.cb_setWorker);
-        cb_setWorker.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if(inGroup[id]==true){
-                    inGroup[id]=false;
-                }
-                else{
-                    inGroup[id]=true;
-                }
-            }
-        });
+        TextView username = (TextView) vi.findViewById(R.id.username);
+        TextView projectname = (TextView) vi.findViewById(R.id.projectname);
+        TextView date = (TextView) vi.findViewById(R.id.date);
+        TextView hours = (TextView) vi.findViewById(R.id.hours);
+        username.setText(logs.get(i)[0]);
+        projectname.setText(logs.get(i)[1]);
+        hours.setText(logs.get(i)[2]);
+        date.setText(logs.get(i)[3]);
         return vi;
     }
 
