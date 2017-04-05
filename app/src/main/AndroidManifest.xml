@@ -61,6 +61,8 @@
         <activity android:name=".Milestones" />
         <activity android:name=".SetMilestone" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name="Comments" />
+        <activity android:name="AddComment" />
         <activity
             android:name=".SeeActiveWorkers"
             android:label="@string/title_activity_see_active_workers"
