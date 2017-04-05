@@ -10,26 +10,60 @@
         android:layout_width="395dp"
         android:layout_height="587dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:weightSum="1"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.08"
+            android:src="@mipmap/user_avatar" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="336dp"
+            android:layout_height="48dp"
+            android:autoText="false"
+            android:breakStrategy="balanced"
+            android:ellipsize="end"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:minLines="2"
+            android:singleLine="false"
+            android:text="TextView"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_height="29dp"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="TextView"
+            android:textSize="20sp"
+            android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/roleLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_weight="0.02"
+            android:text="Role"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

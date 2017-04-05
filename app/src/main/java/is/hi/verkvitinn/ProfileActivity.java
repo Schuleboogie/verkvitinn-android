@@ -1,7 +1,9 @@
 package is.hi.verkvitinn;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -23,6 +25,11 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         this.userService=new UserService(userRepository);
 
+        // Enable back button
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+        this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.home_icon);
+
         session = new SessionManager(getApplicationContext());
 
         HashMap<String, String> userDetails = session.getUserDetails();
@@ -39,5 +46,16 @@ public class ProfileActivity extends AppCompatActivity {
         username.setText(user.getUsername());
         name.setText(user.getName());
         role.setText(user.getRole());
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                Intent intent = new Intent(this, HomeScreen.class);
+                startActivity(intent);
+                return true;
+        }
+        return (super.onOptionsItemSelected(menuItem));
     }
 }
