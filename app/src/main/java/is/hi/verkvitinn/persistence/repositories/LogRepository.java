@@ -87,15 +87,20 @@ public class LogRepository {
         return onCall;
     }
 
-    public static ArrayList<Log> getForAdmin(Context context){
+    public static ArrayList<Log> getForAdmin(String username, Long projectId, Context context){
         DatabaseHelper dbHelper = new DatabaseHelper(context);
         SQLiteDatabase readDB = dbHelper.getReadableDatabase();
         String select = "Select * from log where timeOut<>''";
+        if(!username.equals("")){
+            select = select +" and username='"+username+"'";
+        }
+        if(projectId!=null){
+            select = select+ " and projectId = '" +projectId+"'";
+        }
         Cursor cursor = readDB.rawQuery(select, null);
         ArrayList<Log> forAdmin=new ArrayList<>();
         cursor.moveToFirst();
         while (cursor.isAfterLast() == false) {
-            System.out.println(cursor.getString(1)+ "straight from the daybeis");
 
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.sss");
             Date timeIn = null;

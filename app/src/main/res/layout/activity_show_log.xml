@@ -31,6 +31,24 @@ tools:context="is.hi.verkvitinn.ShowLog">
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <Spinner
+                android:id="@+id/workerspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/projecspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/username"
                 android:layout_width="110dp"
@@ -60,7 +78,7 @@ tools:context="is.hi.verkvitinn.ShowLog">
                 android:text="Worked" />
 
         </LinearLayout>
-        
+
 
         <ListView
             android:id="@+id/listviewlogs"

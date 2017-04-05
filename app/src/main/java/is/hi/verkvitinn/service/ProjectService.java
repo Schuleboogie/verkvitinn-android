@@ -44,15 +44,23 @@ public class ProjectService {
 		return logRepository.sholdCheckout(username, projectId, context);
 	}
 
+	public Project findByName(String name, Context context){
+		return projects.findByName(name, context);
+	}
+
 	public ArrayList<String> getOnCall(Long projectId, Context context){
 		LogRepository logRepository = new LogRepository();
 		return logRepository.getOnCall(projectId, context);
 	}
 
 
-	public ArrayList<Log> getForAdmin(Context context){
+	public ArrayList<Log> getForAdmin(String username, String projectname, Context context){
 		LogRepository logRepository = new LogRepository();
-		return logRepository.getForAdmin(context);
+		Long projectId = null;
+		if(!projectname.equals("")){
+			projectId = findByName(projectname, context).getId();
+		}
+		return logRepository.getForAdmin(username, projectId, context);
 	}
 
 	public List<Project> findByUserAndStatus(String user, boolean onGoing, boolean notStarted, boolean finsihed, Context context){

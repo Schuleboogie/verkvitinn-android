@@ -34,7 +34,7 @@
         android:text="@string/my_profile" />
 
     <Button
-        android:text="@string/active_workers"
+        android:text="Workers attendance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/getActiveWorkers"
