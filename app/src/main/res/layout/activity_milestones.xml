@@ -6,21 +6,33 @@
     android:layout_height="match_parent"
     tools:context="is.hi.verkvitinn.Milestones">
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="376dp"
-        android:layout_height="46dp"
-        android:layout_marginRight="8dp"
-        android:onClick="setMilestone"
-        android:text="Set milestone"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <RelativeLayout
+        android:layout_width="395dp"
+        android:layout_height="585dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
-    <ListView
-        android:id="@+id/milestoneList"
-        android:layout_width="376dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="25dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="83dp" />
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="setMilestone"
+            android:text="Set milestone"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <ListView
+            android:id="@+id/milestoneList"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/button7"
+            android:layout_marginTop="21dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="85dp" />
+
+    </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

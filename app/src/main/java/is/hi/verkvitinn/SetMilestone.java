@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class SetMilestone extends AppCompatActivity {
     MilestoneRepository milestones;
     ProjectRepository projects;
 
-
+    public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
     private Long projectId;
 
     @Override
@@ -44,7 +45,12 @@ public class SetMilestone extends AppCompatActivity {
         EditText milestoneTitleElement = (EditText) findViewById(R.id.milestoneTitle);
         String milestoneTitle = milestoneTitleElement.getText().toString();
         Milestone newMilestone = new Milestone(this.projectId, new Date(), milestoneTitle);
-        projectService.setMilestone(newMilestone, this);
+        if (projectService.setMilestone(newMilestone, this) != null) {
+            Toast.makeText(this, "Milestone created", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Milestones.class);
+            intent.putExtra(PROJECT_ID, this.projectId);
+            startActivity(intent);
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {

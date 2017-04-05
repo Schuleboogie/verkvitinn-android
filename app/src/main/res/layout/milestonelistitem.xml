@@ -10,11 +10,14 @@
         android:id="@+id/mTitle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
         android:textStyle="normal|bold" />
 
     <TextView
         android:id="@+id/mTimestamp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textAlignment="textEnd" />
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:text="dsfdlkjksfdljhfgdikljhudsfgkljfgdlkjfgdlkfgd"
+        android:textAlignment="viewStart" />
 </LinearLayout>
