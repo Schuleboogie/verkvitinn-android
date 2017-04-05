@@ -1,5 +1,7 @@
 package is.hi.verkvitinn.service;
 
+import android.content.Context;
+
 import is.hi.verkvitinn.persistence.entities.Message;
 import is.hi.verkvitinn.persistence.repositories.MessageRepository;
 
@@ -19,32 +21,24 @@ public class MessageService {
 	}
 
 	// Create message
-	public Message create(Message newMessage) {
+	public Message create(Message newMessage, Context context) {
 		// Save message
-		return messages.save(newMessage);
+		return messages.save(newMessage, context);
 	}
 
 	// Find messages by author
-	public List<Message> findByProjectId(Long projectId) {
-		List<Message> foundMessages = messages.findByProjectId(projectId);
+	public List<Message> findByProjectId(Long projectId, Context context) {
+		List<Message> foundMessages = messages.findByProjectId(projectId, context);
 		// Sort messages by timestamp
-		Collections.sort(foundMessages, new Comparator<Message>() {
-			public int compare(Message m1, Message m2) {
-				if (m1.getTimestamp() == null || m2.getTimestamp() == null)
-					return 0;
-				return m2.getTimestamp().compareTo(m1.getTimestamp());
-			}
-		});
+		if (foundMessages != null) {
+			Collections.sort(foundMessages, new Comparator<Message>() {
+				public int compare(Message m1, Message m2) {
+					if (m1.getTimestamp() == null || m2.getTimestamp() == null)
+						return 0;
+					return m2.getTimestamp().compareTo(m1.getTimestamp());
+				}
+			});
+		}
 		return foundMessages;
-	}
-
-	// Find message by id
-	public Message findOne(Long messageId) {
-		return messages.findOne(messageId);
-	}
-
-	// Delete message
-	public void delete(Message message) {
-		messages.delete(message);
 	}
 }

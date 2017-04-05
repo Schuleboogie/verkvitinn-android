@@ -175,7 +175,11 @@ public class ProjectScreen extends AppCompatActivity {
         intent.putExtra(PROJECT_LOCATION, projectLocation);
         startActivity(intent);
     }
-
+    public void openComments(View view) {
+        Intent intent = new Intent(this, Comments.class);
+        intent.putExtra(PROJECT_ID, this.projectId);
+        startActivity(intent);
+    }
     public void seeMilestones(View view) {
         Intent intent = new Intent(this, Milestones.class);
         intent.putExtra(PROJECT_ID, this.projectId);
