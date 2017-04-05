@@ -64,7 +64,8 @@
         <activity
             android:name=".SeeActiveWorkers"
             android:label="@string/title_activity_see_active_workers"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ShowLog"></activity>
     </application>
 
 </manifest>

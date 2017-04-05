@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
+import java.text.DateFormat;
 import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import is.hi.verkvitinn.persistence.entities.Log;
 import is.hi.verkvitinn.persistence.entities.Milestone;
@@ -82,5 +85,37 @@ public class LogRepository {
             cursor.moveToNext();
         }
         return onCall;
+    }
+
+    public static ArrayList<Log> getForAdmin(Context context){
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase readDB = dbHelper.getReadableDatabase();
+        String select = "Select * from log where timeOut<>''";
+        Cursor cursor = readDB.rawQuery(select, null);
+        ArrayList<Log> forAdmin=new ArrayList<>();
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false) {
+
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS.SSS");
+            Date timeIn = null;
+            try {
+                timeIn = formatter.parse(cursor.getString(1));
+            }
+            catch (ParseException e) {
+                System.out.println("villa í timeIn conversion");
+            }
+            Date timeOut = null;
+            try {
+                timeOut = formatter.parse(cursor.getString(1));
+            }
+            catch (ParseException e) {
+                System.out.println("villa í timeOut conversion");
+            }
+
+            Log templog = new Log(cursor.getLong(4), timeIn, timeOut, cursor.getString(3));
+            forAdmin.add(templog);
+            cursor.moveToNext();
+        }
+        return forAdmin;
     }
 }
