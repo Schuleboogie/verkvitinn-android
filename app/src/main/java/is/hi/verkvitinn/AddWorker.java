@@ -109,6 +109,9 @@ public class AddWorker extends AppCompatActivity {
 
                     //should open the project screen
                     Project newProject=new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, null, null, userArray, hworkerarray, "Not started");
+                    if(!projectId.equals("")){
+                        newProject.setId(Long.parseLong(projectId));
+                    }
                     ProjectService.create(newProject, context);
                     startActivity(intent);
                 }

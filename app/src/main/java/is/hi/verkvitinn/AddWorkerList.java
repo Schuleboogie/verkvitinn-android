@@ -87,6 +87,7 @@ public class AddWorkerList extends ArrayAdapter {
         });
         CheckBox cb_setHeadWorker = (CheckBox) vi.findViewById(R.id.cb_setHeadWorker);
         cb_setHeadWorker.setChecked(isHeadworker(tworkers.getUsername()));
+        asHeadWorker[id]=isHeadworker(tworkers.getUsername());
         cb_setWorker.setEnabled(!isHeadworker(tworkers.getUsername()));
         cb_setHeadWorker.setOnClickListener(new View.OnClickListener() {
 
