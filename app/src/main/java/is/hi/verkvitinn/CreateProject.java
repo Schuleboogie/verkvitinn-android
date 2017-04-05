@@ -3,6 +3,7 @@ package is.hi.verkvitinn;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ public class CreateProject extends AppCompatActivity {
     private String admin;
     private String username;
     private SessionManager session;
-
+    private String editMode;
     private Long projectId;
 
     @Override
@@ -65,7 +66,7 @@ public class CreateProject extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            String editMode = extras.getString(ProjectScreen.PROJECT_EDIT);
+            editMode = extras.getString(ProjectScreen.PROJECT_EDIT);
             String projectId = extras.getString(ProjectScreen.PROJECT_ID);
             if (editMode.equals("true")) {
                 // Find project
@@ -92,6 +93,12 @@ public class CreateProject extends AppCompatActivity {
         // Assign admin hér
         String admin = username;
         Intent intent = new Intent(this, AddWorkerGroup.class);
+        if(this.projectId!=null){
+            intent.putExtra("ProjectId", Long.toString(this.projectId));
+        }
+        else{
+            intent.putExtra("ProjectId", "");
+        }
         intent.putExtra("projectName", projectName);
         intent.putExtra("admin", admin);
         intent.putExtra("projectDescription", projectDescription);

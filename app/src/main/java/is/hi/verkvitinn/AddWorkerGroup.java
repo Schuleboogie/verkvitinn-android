@@ -22,7 +22,6 @@ public class AddWorkerGroup extends AppCompatActivity {
     private TextView errorText;
     private ListView groupList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.workerGroupRepository=new WorkerGroupRepository();
@@ -32,6 +31,8 @@ public class AddWorkerGroup extends AppCompatActivity {
         final String projectLocation = getIntent().getStringExtra("projectLocation");
         final String projectTools = getIntent().getStringExtra("projectTools");
         final String projectEstTime = getIntent().getStringExtra("projectEstTime");
+        final String projectId = getIntent().getStringExtra("ProjectId");
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_worker_group);
@@ -66,6 +67,8 @@ public class AddWorkerGroup extends AppCompatActivity {
                     intent.putExtra("projectLocation", projectLocation);
                     intent.putExtra("projectTools", projectTools);
                     intent.putExtra("projectEstTime", projectEstTime);
+                    intent.putExtra("ProjectId", projectId);
+                    Log.d("ProjectId", projectId);
                     startActivity(intent);
                 }
             });
