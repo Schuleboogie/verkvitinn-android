@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,8 +33,14 @@ public class HomeScreen extends AppCompatActivity {
     private String username;
     private String admin;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Enable logout button
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setHomeButtonEnabled(true);
+        this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.logout_action);
+
         session = new SessionManager(getApplicationContext());
 
         HashMap<String, String> user = session.getUserDetails();
@@ -153,5 +160,18 @@ public class HomeScreen extends AppCompatActivity {
                 errorText.setText("No projects found");
             }
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                // Logout user session wise
+                session.logoutUser();
+                Intent intent = new Intent(this, LoginScreen.class);
+                startActivity(intent);
+                return true;
+        }
+        return (super.onOptionsItemSelected(menuItem));
     }
 }
