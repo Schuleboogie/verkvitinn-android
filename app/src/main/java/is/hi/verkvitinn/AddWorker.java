@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -43,18 +44,34 @@ public class AddWorker extends AppCompatActivity {
         final String projectLocation = getIntent().getStringExtra("projectLocation");
         final String projectTools = getIntent().getStringExtra("projectTools");
         final String projectEstTime = getIntent().getStringExtra("projectEstTime");
+        final String projectId = getIntent().getStringExtra("ProjectId");
+        Log.d("in addworker", projectId);
         this.userService= new UserService(userRepository);
         this.projectService= new ProjectService(projectRepository, milestoneRepository);
+        ArrayList<User> groupUser = new ArrayList<>();
+        ArrayList<User> groupHeadworkers = new ArrayList<>();
+        if(!projectId.equals("")){
+            Project project = projectService.findOne(Long.parseLong(projectId), this);
+            String[] headworkers = project.getHeadWorkers();
+            String [] workers = project.getWorkers();
+
+            for(int n=0;n<workers.length;n++){
+                groupUser.add(userService.findByUsername(workers[n], this));
+            }
+            for(int n=0;n<headworkers.length;n++){
+                groupHeadworkers.add(userService.findByUsername(headworkers[n],this));
+            }
+        }
         errorText = (TextView) findViewById(R.id.errorText);
         workerList = (ListView) findViewById(R.id.workerList);
         List<User> users= userService.findByRole("worker", this);
-        ArrayList<User> groupUser = new ArrayList<>();
-        ArrayList<String> usernames = (ArrayList<String>) getIntent().getStringArrayListExtra("usersInGroup");
+        ArrayList<String> usernames =  getIntent().getStringArrayListExtra("usersInGroup");
         for(int n =0;n<usernames.size();n++){
             groupUser.add(userService.findByUsername(usernames.get(n), this));
         }
+
         if(users!=null){
-            final AddWorkerList adapter = new AddWorkerList(this, android.R.layout.simple_list_item_1, users, groupUser);
+            final AddWorkerList adapter = new AddWorkerList(this, android.R.layout.simple_list_item_1, users, groupUser, groupHeadworkers);
             final Context context = this;
             workerList.setAdapter(adapter);
             Button submitGroupButton = (Button)findViewById(R.id.submitWorkersButton);
@@ -92,6 +109,9 @@ public class AddWorker extends AppCompatActivity {
 
                     //should open the project screen
                     Project newProject=new Project(projectName, admin, projectDescription, projectLocation, projectTools, projectEstTime, null, null, userArray, hworkerarray, "Not started");
+                    if(!projectId.equals("")){
+                        newProject.setId(Long.parseLong(projectId));
+                    }
                     ProjectService.create(newProject, context);
                     startActivity(intent);
                 }

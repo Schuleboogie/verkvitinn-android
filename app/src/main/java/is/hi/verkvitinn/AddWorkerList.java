@@ -24,13 +24,15 @@ public class AddWorkerList extends ArrayAdapter {
     private Boolean[] inGroup;
     private Boolean[] asHeadWorker;
     List<User> checked;
+    List<User> checkedHeadworkers;
     public static final String PROJECT_ID = "is.hi.verkvitinn.MESSAGE";
 
-    public AddWorkerList(Context context, int resource, List<User> workers, List<User> checked) {
+    public AddWorkerList(Context context, int resource, List<User> workers, List<User> checked, List<User> checkedHeadworkers) {
         super(context, resource, workers);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.checked=checked;
         this.workers = workers;
+        this.checkedHeadworkers = checkedHeadworkers;
         inGroup = new Boolean[workers.size()];
         asHeadWorker = new Boolean[workers.size()];
         for(int n=0;n< workers.size();n++){
@@ -84,6 +86,9 @@ public class AddWorkerList extends ArrayAdapter {
             }
         });
         CheckBox cb_setHeadWorker = (CheckBox) vi.findViewById(R.id.cb_setHeadWorker);
+        cb_setHeadWorker.setChecked(isHeadworker(tworkers.getUsername()));
+        asHeadWorker[id]=isHeadworker(tworkers.getUsername());
+        cb_setWorker.setEnabled(!isHeadworker(tworkers.getUsername()));
         cb_setHeadWorker.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -113,6 +118,16 @@ public class AddWorkerList extends ArrayAdapter {
            }
        }
        return false;
+    }
+
+    public boolean isHeadworker(String username){
+        for(int n=0;n<checkedHeadworkers.size();n++){
+            Log.d(checkedHeadworkers.get(n).getUsername(), username);
+            if(checkedHeadworkers.get(n).getUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
