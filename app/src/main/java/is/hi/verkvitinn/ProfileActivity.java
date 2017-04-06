@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -46,6 +47,10 @@ public class ProfileActivity extends AppCompatActivity {
         username.setText(user.getUsername());
         name.setText(user.getName());
         role.setText(user.getRole());
+    }
+    public void openDBBrowser(View view) {
+        Intent dbmanager = new Intent(this, AndroidDatabaseManager.class);
+        startActivity(dbmanager);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
