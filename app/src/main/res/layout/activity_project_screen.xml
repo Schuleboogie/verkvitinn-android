@@ -102,6 +102,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/lightbutton"
+        android:padding="12dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:onClick="editProject"
@@ -192,7 +194,10 @@
         android:layout_below="@+id/tv_status"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:background="@drawable/darkbutton"
+        android:padding="12dp"
         android:layout_marginTop="10dp"
+        android:textColor="@android:color/background_light"
         android:layout_alignRight="@+id/startProjectButton"
         android:layout_alignEnd="@+id/startProjectButton" />
 
@@ -200,10 +205,11 @@
         android:id="@+id/startProjectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/greenbutton"
+        android:padding="12dp"
         android:layout_above="@+id/tv_projectName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@android:color/holo_green_dark"
         android:onClick="startProject"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -217,7 +223,8 @@
         android:layout_above="@+id/tv_projectName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@android:color/holo_red_light"
+        android:background="@drawable/redbutton"
+        android:padding="12dp"
         android:onClick="finishProject"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -232,6 +239,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/openMapButton"
+        android:background="@drawable/darkbutton"
+        android:padding="12dp"
+        android:textColor="@android:color/background_light"
         android:onClick="seeMilestones"
         android:text="See milestones" />
 
@@ -242,7 +252,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tv_tools"
-        android:background="@android:color/holo_green_dark"
+        android:background="@drawable/greenbutton"
+        android:padding="12dp"
         android:onClick="checkin"
         android:text="Check in"
         android:visibility="gone"/>
@@ -252,9 +263,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/redbutton"
+        android:textColor="@android:color/background_light"
+        android:padding="12dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tv_tools"
-        android:background="@android:color/holo_red_light"
         android:text="Check out"
         android:onClick="checkout"/>
 
@@ -267,6 +280,8 @@
         android:text="See active Workers"
         android:onClick="seeActive"
         android:layout_alignTop="@+id/tv_projectName"
+        android:background="@drawable/lightbutton"
+        android:padding="12dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -281,7 +296,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/openMapButton"
         android:layout_marginTop="5dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/bluebutton"
+        android:padding="12dp"
         android:onClick="openComments"
         android:text="See comments" />
 

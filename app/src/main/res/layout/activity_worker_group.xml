@@ -47,6 +47,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:background="@drawable/lightbutton"
+        android:padding="12dp"
         android:id="@+id/submitGroupButton"
         android:layout_below="@+id/projectList" />
 

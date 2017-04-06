@@ -25,13 +25,15 @@
             android:id="@+id/button9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:onClick="addComment"
+            android:background="@drawable/lightbutton"
+            android:padding="12dp"
+            android:text="Add comment"
+            android:layout_below="@+id/messageText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/messageText"
-            android:layout_marginLeft="6dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="12dp"
-            android:onClick="addComment"
-            android:text="Add comment" />
+            android:layout_marginLeft="102dp"
+            android:layout_marginStart="102dp" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

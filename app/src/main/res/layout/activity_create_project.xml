@@ -77,6 +77,8 @@
         android:layout_below="@+id/projectEstTime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:background="@drawable/lightbutton"
+        android:padding="12dp"
         android:id="@+id/button4"
         android:layout_alignRight="@+id/projectEstTime"
         android:layout_alignEnd="@+id/projectEstTime"

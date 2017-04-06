@@ -129,7 +129,7 @@ public class ShowLog extends AppCompatActivity {
             Date timeOut = logs.get(n).getTimeOut();
             Long diff = timeOut.getTime() - timeIn.getTime();
             Long diffHours = diff / (1000 * 60 * 60);
-            Long diffMinutes = diff / (1000 * 60);
+            Long diffMinutes = diff / (1000 * 60)%60;
             String time = diffHours + ":" + diffMinutes;
             Format formatter = new SimpleDateFormat("yyyy/MM/dd");
             String timestampin = formatter.format(logs.get(n).getTimeIn());

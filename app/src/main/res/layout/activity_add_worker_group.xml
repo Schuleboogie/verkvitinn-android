@@ -25,7 +25,7 @@
     <ListView
         android:id="@+id/groupList"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="500dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tv_groupName"
@@ -39,6 +39,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/groupList"
+        android:background="@drawable/lightbutton"
+        android:padding="12dp"
         android:text="Add to project" />
 
 </RelativeLayout>

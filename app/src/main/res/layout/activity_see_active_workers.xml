@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@android:color/holo_green_dark"
+            android:background="@drawable/greenbutton"
+            android:padding="12dp"
             android:onClick="backToProject"
             android:text="Back to project"
             android:textColor="@color/common_google_signin_btn_text_dark_default" />

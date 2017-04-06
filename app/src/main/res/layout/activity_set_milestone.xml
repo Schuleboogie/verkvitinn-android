@@ -23,6 +23,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/milestoneTitle"
+            android:background="@drawable/darkbutton"
+            android:textColor="@android:color/background_light"
+            android:padding="12dp"
             android:layout_marginTop="37dp"
             android:onClick="createMilestone"
             android:text="Create milestone" />

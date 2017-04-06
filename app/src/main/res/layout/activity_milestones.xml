@@ -19,6 +19,8 @@
             android:onClick="setMilestone"
             android:text="Set milestone"
             tools:layout_editor_absoluteX="8dp"
+            android:background="@drawable/lightbutton"
+            android:padding="12dp"
             tools:layout_editor_absoluteY="0dp"
             android:layout_marginTop="7dp"
             android:layout_below="@+id/button5"
@@ -41,15 +43,15 @@
             android:id="@+id/button5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@android:color/holo_green_dark"
+            android:background="@drawable/greenbutton"
             android:onClick="backToProject"
             android:text="Back to project"
-            android:textColor="@color/common_google_signin_btn_text_dark_default" />
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 

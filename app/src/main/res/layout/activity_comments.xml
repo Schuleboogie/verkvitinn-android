@@ -30,8 +30,9 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView"
             android:layout_marginTop="7dp"
-            android:background="@color/colorPrimaryDark"
             android:onClick="addComment"
+            android:background="@drawable/bluebutton"
+            android:padding="12dp"
             android:text="Add comment" />
 
         <ListView
@@ -52,7 +53,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
             android:layout_toRightOf="@+id/button11"
-            android:background="@android:color/holo_green_dark"
+            android:background="@drawable/greenbutton"
+            android:padding="12dp"
             android:onClick="returnToProject"
             android:text="Back to project"
             android:textColor="@color/common_google_signin_btn_text_dark_default" />
