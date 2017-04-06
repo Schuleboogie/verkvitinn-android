@@ -44,5 +44,18 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true" />
 
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/button11"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_toRightOf="@+id/button11"
+            android:background="@android:color/holo_green_dark"
+            android:onClick="returnToProject"
+            android:text="Back to project"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

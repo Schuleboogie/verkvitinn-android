@@ -12,13 +12,22 @@
         android:orientation="vertical">
 
 
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@android:color/holo_green_dark"
+            android:onClick="backToProject"
+            android:text="Back to project"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
         <TextView
             android:id="@+id/texti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Theese workers are active right now"
-            android:textSize="22dp"/>
+            android:text="These workers are active right now"
+            android:textSize="22dp" />
 
         <ListView
             android:layout_width="match_parent"

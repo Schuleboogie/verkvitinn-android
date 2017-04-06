@@ -22,7 +22,7 @@ import is.hi.verkvitinn.ProjectScreen;
 public class ProjectList extends ArrayAdapter {
     List<Project> projects;
     private static LayoutInflater inflater = null;
-    public static final String PROJECT_ID = "is.hi.verkvitinn.MESSAGE";
+    public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
 
     public ProjectList(Context context, int resource, List<Project> projects) {
         super(context, resource, projects);

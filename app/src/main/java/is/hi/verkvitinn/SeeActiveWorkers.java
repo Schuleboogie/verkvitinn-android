@@ -1,5 +1,6 @@
 package is.hi.verkvitinn;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,11 +22,15 @@ public class SeeActiveWorkers extends AppCompatActivity {
     ProjectRepository projectRepository;
     MilestoneRepository milestoneRepository;
 
+    private Long projectId;
+    public static final String PROJECT_ID = "is.hi.verkvitinn.PROJECT_ID";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_active_workers);
         Long projectid = Long.parseLong(getIntent().getStringExtra("PROJECT_ID"));
+        this.projectId = projectid;
         this.projectService = new ProjectService(projectRepository, milestoneRepository);
         ListView activeWorkerList = (ListView) findViewById(R.id.activeWorkerList);
         ArrayList<String> active = projectService.getOnCall(projectid, this);
@@ -38,6 +43,11 @@ public class SeeActiveWorkers extends AppCompatActivity {
         else{
             texti.setText("There are no workers active at the moment");
         }
+    }
+    public void backToProject(View view) {
+        Intent intent = new Intent(this, ProjectScreen.class);
+        intent.putExtra(PROJECT_ID, this.projectId);
+        startActivity(intent);
     }
 
 }

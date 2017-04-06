@@ -19,19 +19,37 @@
             android:onClick="setMilestone"
             android:text="Set milestone"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginTop="7dp"
+            android:layout_below="@+id/button5"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ListView
             android:id="@+id/milestoneList"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="470dp"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/button7"
-            android:layout_marginTop="21dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="85dp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/holo_green_dark"
+            android:onClick="backToProject"
+            android:text="Back to project"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     </RelativeLayout>
 

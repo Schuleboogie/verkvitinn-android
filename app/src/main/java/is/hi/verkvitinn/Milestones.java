@@ -87,6 +87,11 @@ public class Milestones extends AppCompatActivity {
         intent.putExtra(PROJECT_ID, this.projectId);
         startActivity(intent);
     }
+    public void backToProject(View view) {
+        Intent intent = new Intent(this, ProjectScreen.class);
+        intent.putExtra(PROJECT_ID, this.projectId);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
